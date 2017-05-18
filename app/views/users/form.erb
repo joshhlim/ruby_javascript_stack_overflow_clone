@@ -1,0 +1,17 @@
+<% if logged_in? %>
+  <p>EDIT YOUR INFORMATION</p>
+<% else %>
+  <p>LOGIN</p>
+<% end %>
+
+<% if logged_in? %>
+  <form action="/users/<%= user.id %>" method="post">
+  <input type="hidden" name="_method" value="put" />
+<% else %>
+  <form action="/users/login" method="post">
+<% end %>
+
+<%= erb :'users/_fieldsets', locals: { user: @user } %>
+
+  <input type="submit" value="Submit">
+</form>
