@@ -37,7 +37,10 @@ get '/users/logout' do
 get '/users/:id' do
   erb :'users/login' unless session[:id]
   @user = User.find(params[:id])
-  # @questions = Question.where(params[:id])
+  @questions = @user.questions
+  @answers  = @user.answers
+  # @comments = @user.comments
+
   erb :'users/profile'
 end
 

@@ -1,6 +1,7 @@
 <h1 class='question-title'><%= @question.title %></h1>
 
 <p class='question-body'><%= @question.body %></p>
+<p><%= @question.user.username %>   -   <%= @question.updated_at %></p>
 
 <ul>
   <% @question.comments.each do |comment| %>
@@ -16,3 +17,5 @@
     <% end %>
   </ul>
 <% end %>
+
+<h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
