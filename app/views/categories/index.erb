@@ -1,0 +1,15 @@
+<h1>Welcome to the Overflow!!!</h1>
+
+
+
+
+<h3> Choose your category: </h3>
+
+<ul>
+  <% @categories.each do |cat|  %>
+    <li><a href="/category/<%= cat.id %>"><%= cat.name %></a></li>
+  <% end %>
+</ul>
+
+
+

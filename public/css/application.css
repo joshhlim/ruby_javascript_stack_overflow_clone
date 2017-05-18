@@ -1,0 +1,15 @@
+h1, h3 {
+  text-align: center;
+}
+
+h1 {
+  border-bottom: 2px solid grey;
+}
+
+ul {
+  list-style: none;
+  position: relative;
+  left: 46%;
+}
+
+
