@@ -13,6 +13,14 @@ get '/questions/new' do
   end
 end
 
+post '/questions/:id/vote' do
+ @question = Question.find_by(id: params[:id])
+ @category = @question.category
+ @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
+ @vote.save
+ erb :'categories/show'
+end
+
 # create
 post '/questions' do
   @question = Question.create(
