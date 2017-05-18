@@ -1,13 +1,33 @@
 <div class="sub-container">
   <h1><%= question.title %></h1>
   <% if session[:id] == question.questioner_id %>
-  <form action="<%=question.id%>/edit">
-    <input type="submit" value="Edit Question"/>
-  </form>
-  <form action="/questions/<%=question.id%>" method="POST" id="questionform">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete question">
-  </form>
+    <form class="questioner-buttons" action="<%=question.id%>/edit">
+      <input type="submit" value="Edit Question"/>
+    </form>
+    <form class="questioner-buttons" action="/questions/<%=question.id%>" method="POST" id="questionform">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete question">
+    </form>
   <% end %>
   <p><%= question.body %></p>
+
+  <h2>Answers</h2>
+  <% if question.answers %>
+    <% question.answers.each do |answer| %>
+      <div class="questions-answers">
+        <p><%= answer.body %></p>
+        <p>answered by <a href="/users/<%= answer.answerer.id %>" class="question-link"><%= answer.answerer.username %></a></p>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="flex-column">
+    <form class="answer-form flex-column" method="post" action="/questions/<%= question.id %>/answers">
+      <label for="body-textarea">Your Answer:</label>
+      <textarea class="body-textarea" name="answer[body]"></textarea>
+      <input type="submit" value="Respond">
+    </form>
+  </div>
+
 </div>
+
