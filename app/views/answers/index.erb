@@ -1,0 +1,12 @@
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<span><%= "Asked by #{@question.questioner} on #{long_form_date(@question.created_at)}" %></span>
+
+
+<main role="main">
+  <ul class="no-bullets">
+    <% @answers.each do |answer| %>
+      <%= erb :'answers/_show', locals: {question: @question, answer: answer} %>
+    <% end %>
+  </ul>
+</main>
