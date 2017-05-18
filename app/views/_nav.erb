@@ -1,0 +1,17 @@
+<% if session[:id] != nil %>
+  <nav>
+    <ul>
+      <li><a href="/users/<%= @user.id %>"></a> <%= @user.username %> </li>
+      <li><a href="/"></a> Home </li>
+      <li><a href="/users/logout"></a> Logout </li>
+    </ul>
+  </nav>
+<% else %>
+<nav>
+  <ul>
+    <li><a href="/"></a> Home </li>
+    <li><a href="/users/new"></a> Register </li>
+    <li><a href="/users/login"></a> Login </li>
+  </ul>
+</nav>
+<% end %>
