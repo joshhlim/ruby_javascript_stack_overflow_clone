@@ -26,6 +26,7 @@ end
 get '/users/logout' do
   session.clear
   redirect '/'
+end
 
 get '/users/new' do
   erb :'users/new'
@@ -46,5 +47,4 @@ post '/users' do
     puts @errors
     erb :'users/new'
   end
-
 end
