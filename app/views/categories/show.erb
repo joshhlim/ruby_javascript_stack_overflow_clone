@@ -1,9 +1,14 @@
-<h1><%= @category.name %></h1>
+<h1 class="category-name"><%= @category.name %></h1>
 
 
 
 
-<!-- <p> @category.questions </p>-->
-<!-- @category.questions.each do |q|  -->
-  <!-- <!<li> <a "/category/<'% q.id' %>"> <'%q.title %></a></li>   -->
-<!-- <end> -->
+
+<p class=question-header> Questions about (<%= @category.name %>): </p>
+<div class=question-select>
+  <ul>
+    <% @category.questions.each do |q| %>
+      <li> <a href="/questions/<%= q.id %>"> <%= q.title %></a></li>
+    <% end %>
+  </ul>
+</div>

@@ -20,7 +20,7 @@ post '/users' do
 
  post '/users/login' do
    @user = User.find_by(username: params[:user][:username])
-   if @user.authenticate(params[:user][:password])
+   if @user && @user.authenticate(params[:user][:password])
      session[:id] = @user.id
      redirect "/users/#{@user.id}"
    else

@@ -1,0 +1,22 @@
+<h1 class='title'>Welcome to the Overflow!!!</h1>
+
+
+
+
+<h3 class=choose> Choose your category (or search below): </h3>
+
+<div class=category-select>
+  <ul>
+    <% @categories.each do |cat|  %>
+      <li><a href="/category/<%= cat.id %>"><%= cat.name %></a></li>
+    <% end %>
+  </ul>
+</div>
+
+
+<div class="search-form">
+  <form>
+    <label for="search"> What's on your mind?: </label>
+    <input type="text" name="search" placeholder="??????">
+  </form>
+</div>

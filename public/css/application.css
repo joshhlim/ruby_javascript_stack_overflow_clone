@@ -1,15 +1,27 @@
-h1, h3 {
+/*Home header*/
+.title {
   text-align: center;
-}
-
-h1 {
   border-bottom: 2px solid grey;
 }
 
-ul {
+/*plain text*/
+.choose{
+  text-align: center;
+}
+
+/*category list*/
+.category-select > ul {
   list-style: none;
   position: relative;
   left: 46%;
 }
 
+/*category show name*/
+.category-name {
+  text-align: center;
+  border-bottom: 2px solid grey;
+}
 
+form {
+  text-align: center;
+}
