@@ -12,36 +12,33 @@
   <title>DBC Overflow</title>
 </head>
 <body>
+
   <header role="banner"
     <nav class="main-nav flex-row">
       <h3 class="nav-header font-md">dbc overflow</h3>
       <ul class="main-nav-ul flex-row font-sm">
-        <a href="/users/new" class="main-nav-link"><li class="main-nav-li flex-row"><span>Register</span></li></a>
-        <a href="/users/login" class="main-nav-link"><li class="main-nav-li flex-row"><span>Login</span></li></a>
-        <a href="/" class="main-nav-link"><li class="main-nav-li flex-row"><span>Home</span></li></a>
-        <button></button>
+        <% if logged_in? %>
+          <a href="/users/<%= session[:id] %>" class="main-nav-link"><li class="main-nav-li flex-row">Profile</li></a>
+          <a href="/users/logout" class="main-nav-link"><li class="main-nav-li flex-row">Logout</li></a>
+        <% else %>
+          <a href="/users/new" class="main-nav-link"><li class="main-nav-li flex-row"><span>Register</span></li></a>
+          <a href="/users/login" class="main-nav-link"><li class="main-nav-li flex-row"><span>Login</span></li></a>
+        <% end %>
+        <a href="/" class="main-nav-link"><li class="main-nav-li
+        flex-row"><span>Home</span></li></a>
+        <a href="/questions/new"><button class="question-button">Ask a Question</button></a>
       </ul>
     </nav>
   </header>
 
-  class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
-    <div class="max-w-700 center wrap float">
-      <nav class="clearfix mar-b-1">
-        <ul class="no-bullets no-margin no-padding right">
-          <li class="pipe-separate left"><a href="/">Home</a></li>
-            <% if session[:id] %>
-          <li class="pipe-separate left"><a href="/users/<%= session[:id] %>">Profile</a></li>
-          <li class="pipe-separate left"><a href="/users/logout">Logout</a></li>
-            <% else %>
+<!--           <li class="pipe-separate left"><a href="/">Home</a></li>
           <li class="pipe-separate left"><a href="/users/login">Login</a></li>
           <li class="pipe-separate left"><a href="/users/new">Register</a></li>
-            <% end %>
         </ul>
-      </nav>
-    </div>
-  </header>
+ -->
   <div class="main-container flex-column">
     <%= yield %>
   </div>
+
 </body>
 </html>
