@@ -4,16 +4,21 @@ class Question < ActiveRecord::Base
   belongs_to :category
   has_many :answers
   has_many :comments, as: :commentable
-end
 
 
-
-
-def self.search_question(searched_words)
-  searched_words.each do |search|
-    matches = Question.all.select { |q| q.title.include?(search)}
+  def self.search_question(searched_words)
+    matches = []
+    searched_words.each do |search|
+      Question.all.select { |q| matches << q if q.title.include?(search)}
+    end
+    matches.uniq
   end
+
 end
+
+
+
+
 
 
 # all_questions.select {|q| q.title.include?("babby") }
