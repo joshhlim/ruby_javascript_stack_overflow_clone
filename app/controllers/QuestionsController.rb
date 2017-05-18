@@ -5,12 +5,23 @@ end
 
 # new
 get '/questions/new' do
-
+  if session[:id]
+    @categories = Category.all
+    erb :'questions/new'
+  else
+    redirect 'users/new'
+  end
 end
 
 # create
-get '/questions' do
-
+post '/questions' do
+  puts params
+  @question = Question.create(
+    title: params[:question][:title],
+    body: params[:question][:body],
+    category_id: params[:category],
+    user_id: session[:id])
+  redirect :"questions/#{@question.id}"
 end
 
 # show
@@ -25,11 +36,11 @@ get '/questions/:id/edit' do
 end
 
 # update
-get '/questions/:id' do
+put '/questions/:id' do
 
 end
 
 # delete
-get '/questions/:id' do
+delete '/questions/:id' do
 
 end

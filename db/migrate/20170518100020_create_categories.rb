@@ -3,7 +3,6 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.string :name, {null: false, default: 'General' }
 
-
       t.timestamps(null: false)
     end
   end

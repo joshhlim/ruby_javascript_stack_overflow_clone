@@ -1,5 +1,5 @@
 <h1><%= @user.username.capitalize %>'s Profile</h1>
-<% @questions = [] %>
+<% @questions = @user.questions%>
 
 <div>
 	<table>
@@ -16,13 +16,13 @@
 			<th>"Date"</th>
 		</tr>
 
-		<% @questions.each do |question| %>
-		<tr>
-			<td>"category"</td>
-			<td>"question"</td>
-			<td>"created_at"</td>
-		</tr>
-		<% end %>
+			<% @questions.each do |question| %>
+			<tr>
+				<td><%= question.category.name %></td>
+				<td><a href='/questions/<%= question.id %>'><%= question.title %></a></td>
+				<td><%= question.created_at %></td>
+			</tr>
+			<% end %>
 		<% end %>
 	</table>
 </div>
