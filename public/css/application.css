@@ -23,15 +23,15 @@ body {
   align-items: center;
   justify-content: center; }
 
-.font-md {
-  font-size: 1.2em; }
+.font-sm {
+  font-size: 1em; }
 
-.font-mdlg {
+.font-md {
   font-size: 2em; }
 
 .main-nav {
-  height: 80px;
-  background-color: darkgrey;
+  height: 70px;
+  background-color: lightgray;
   justify-content: space-between;
   box-shadow: 0px 2px 2px 0px grey; }
 
@@ -51,7 +51,8 @@ body {
 
 .main-nav-li {
   height: 100%;
-  padding: 0 20px; }
+  padding: 0 20px;
+  transition: background 0.1s linear; }
 
 .main-container {
   width: 100%; }
