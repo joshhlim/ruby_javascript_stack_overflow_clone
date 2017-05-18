@@ -1,5 +1,7 @@
-<ul>
-  <% questions.each do |question| %>
-    <li id="home-questions-li"><a href=questions/<%=question.id%>><%= question.title %></a></li>
-  <% end %>
-</ul>
+<div class="sub-container">
+  <ul>
+    <% questions.each do |question| %>
+      <li id="home-questions-li"><a href=questions/<%=question.id%>><%= question.title %></a></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,6 +1,7 @@
 // ========== I. Resets ==========
 @import 'reset'
 $primary-font: 'Roboto', sans-serif
+$primary-color: darkgrey
 
 // *
 //   border: dashed 1px red
@@ -13,6 +14,11 @@ body
   display: flex
   align-items: center
   justify-content: center
+.flex-column
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
 .font-md
   font-size: 1.2em
 .font-mdlg
@@ -22,7 +28,7 @@ body
 // ========== a. Navbar ==========
 .main-nav
   height: 80px
-  background-color: darkgrey
+  background-color: $primary-color
   justify-content: space-between
   box-shadow: 0px 2px 2px 0px grey
 .nav-header
@@ -39,5 +45,18 @@ body
   height: 100%
   padding: 0 20px
 
+// ========== b. Main Content ==========
+.main-container
+  width: 100%
+.sub-container
+  max-width: 960px
+  width: 80%
+  margin: 5% 0
 
 
+// ========== IV. Legacy ==========
+.pipe-separate
+  padding: 0 20px
+  border-right: solid 1px lightgrey
+.left
+  left: 0

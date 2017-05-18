@@ -1,5 +1,6 @@
-<h1><%= question.title %></h1>
-<% if session[:id] == question.questioner_id %>
+<div class="sub-container">
+  <h1><%= question.title %></h1>
+  <% if session[:id] == question.questioner_id %>
   <form action="<%=question.id%>/edit">
     <input type="submit" value="Edit Question"/>
   </form>
@@ -7,5 +8,6 @@
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete question">
   </form>
-<% end %>
-<p><%= question.body %></p>
+  <% end %>
+  <p><%= question.body %></p>
+</div>
