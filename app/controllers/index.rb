@@ -9,3 +9,9 @@ get '/category/:id' do
   erb :'/categories/show'
 end
 
+get '/search' do
+  @query = params[:search].split(' ')
+
+
+
+end
