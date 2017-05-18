@@ -1,5 +1,11 @@
 <h1 class='question-title'><%= @question.title %></h1>
-
+  <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
+    <button class = "upvote-button" type="submit" name="Upvote!"></button>
+ </form>
+   <span> <%= @question.votes.count %> votes || </span>
+   <span> author: <%= @question.user.username %> ||</span>
+   <span> <%= @question.comments.count %> comments || </span>
+   <a class="delete" href='/questions/<%= @question.id %>'>delete this question</a>
 <p class='question-body'><%= @question.body %></p>
 
 <ul>
