@@ -10,4 +10,24 @@
   </form>
   <% end %>
   <p><%= question.body %></p>
+  <ul id="question-comment-ul">
+    <% question.comments.each do |comment| %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
+  <a href="/questions/<%= question.id %>/answers/new">Answer this question</a>
+  <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
+  </br></br>
+  <ul>
+    <% question.answers.each do |answer| %>
+      <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+        <ul>
+          <% answer.comments.each do |comment| %>
+            <li><%= comment.body %> - <%= (User.find(session[:id])).username %></li>
+          <% end %>
+        </ul>
+      <a href="/questions/<%= question.id %>/answers/<%= answer.id %>/comments/new">Comment on this answer</a>
+
+    <% end %>
+  </ul>
 </div>
