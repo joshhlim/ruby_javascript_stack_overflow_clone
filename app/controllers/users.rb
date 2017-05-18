@@ -48,5 +48,4 @@ post '/users' do
     puts @errors
     erb :'users/new'
   end
-
 end
