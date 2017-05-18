@@ -23,7 +23,6 @@ end
 
 # create
 post '/questions' do
-  puts params
   @question = Question.create(
     title: params[:question][:title],
     body: params[:question][:body],
@@ -51,4 +50,20 @@ end
 # delete
 delete '/questions/:id' do
 
+end
+
+# new answer
+get '/questions/:id/answers/new' do
+  @question = Question.find(params[:id])
+  erb :'answers/new'
+end
+
+# create answer
+post '/questions/:id/answers' do
+  question = Question.find(params[:id])
+  @answer = Answer.create(
+    body: params[:answer][:body],
+    question_id: question.id,
+    user_id: session[:id])
+  redirect :"questions/#{params[:id]}"
 end

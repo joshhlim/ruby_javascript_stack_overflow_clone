@@ -1,12 +1,11 @@
 <h1><%= @user.username.capitalize %>'s Profile</h1>
-<% @questions = @user.questions%>
 
 <div>
 	<table>
 		<% if @questions.empty? %>
 		<tr>
 			<th>
-				<h2>Got a Question?</h2>
+				<h2><a href='/questions/new'>Got a Question?</a></h2>
 			</th>
 		</tr>
 		<% else %>
@@ -21,6 +20,20 @@
 				<td><%= question.category.name %></td>
 				<td><a href='/questions/<%= question.id %>'><%= question.title %></a></td>
 				<td><%= question.created_at %></td>
+			</tr>
+			<% end %>
+		<% end %>
+	</table>
+	<table>
+		<% if @answers %>
+		<tr>
+			<th>Questions Answered</th>
+			<th>Date</th>
+		</tr>
+			<% @answers.each do |answer| %>
+			<tr>
+				<td><a href='/questions/<%= answer.question.id %>'><%= answer.question.title %></a></td>
+				<td><%= answer.created_at %></td>
 			</tr>
 			<% end %>
 		<% end %>

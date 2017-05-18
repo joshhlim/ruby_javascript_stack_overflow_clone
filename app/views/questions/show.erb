@@ -1,4 +1,10 @@
 <h1 class='question-title'><%= @question.title %></h1>
+
+
+<div class='question-content'>
+  <p class='question-body'><%= @question.body %></p>
+  <p class='question-user'><%= @question.user.username %>   -   <%= @question.updated_at %></p>
+</div>
   <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
     <button class = "upvote-button" type="submit" name="Upvote!"></button>
  </form>
@@ -8,17 +14,24 @@
    <a class="delete" href='/questions/<%= @question.id %>'>delete this question</a>
 <p class='question-body'><%= @question.body %></p>
 
+
 <ul>
   <% @question.comments.each do |comment| %>
     <li><%= comment.body %></li>
   <% end %>
 </ul>
 
+<h2><%= @question.answers.count %> Answers</h2>
 <% @question.answers.each do |answer| %>
-  <p><%= answer.body %></p>
-  <ul>
-    <% answer.comments.each do |comment| %>
-      <li><%= comment.body %></li>
-    <% end %>
-  </ul>
+  <div class='answer'
+    <p><%= answer.body %></p>
+    <p class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></p>
+    <ul>
+      <% answer.comments.each do |comment| %>
+        <li><%= comment.body %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
+
+<h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>

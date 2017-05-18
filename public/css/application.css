@@ -28,6 +28,26 @@
 }
 
 
-/*form {
-  text-align: center;
-}*/
+.question-title {
+  border-bottom: 1px solid gray;
+}
+
+.question-content {
+  margin-left: 20px;
+}
+
+.question-user {
+  margin-right: 20px;
+  text-align: right;
+}
+
+.answer {
+  border-top: 1px solid gray;
+  padding-left: 20px;
+}
+
+.answer-user {
+  margin-right: 20px;
+  text-align: right;
+}
+
