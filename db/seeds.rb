@@ -7,8 +7,9 @@ require 'faker'
   user = User.create(username: username, email: email, password: 'password')
   # Have fake user ask 3 questions
   3.times do
+    title = Faker::Lorem.sentence
     question = Faker::Lorem.paragraphs(2).join('')
-    Question.create(question: question, questioner_id: user.id)
+    Question.create(title: title, body: question, questioner_id: user.id)
   end
 end
 
@@ -18,6 +19,6 @@ Question.all.each do |question|
   # Choose a random user to provide the answer
   user = User.where.not(id: question.questioner_id).sample
   answer = Faker::Lorem.paragraphs(2).join('')
-  Answer.create(answer: answer, answerer_id: user.id, question_id: question.id)
+  Answer.create(body: answer, answerer_id: user.id, question_id: question.id)
   end
 end
