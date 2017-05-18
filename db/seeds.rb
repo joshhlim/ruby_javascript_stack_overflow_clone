@@ -12,10 +12,10 @@ Comment.create(body: '^^^^', commentable_type: 'answer', commentable_id: 2)
 
 Comment.create(body: 'pls learn 2 type, friend', commentable_type: 'question', commentable_id: 1)
 
-Question.create(title: 'how is babby formed', body: 'how girl get pragnent', category_id: 1)
-Question.create(title: 'what is your name', body: 'Monty Python', category_id: 2)
-Question.create(title: 'What is your favorite color', body: 'blue...no yelllooowww', category_id: 3)
-Question.create(title: 'what is the average velocity of a mongoose', body: 'african or european', category_id: 4)
+Question.create(title: 'how is babby formed', body: 'how girl get pragnent', user_id: 1, category_id: 1)
+Question.create(title: 'what is your name', body: 'Monty Python', user_id: 1, category_id: 2)
+Question.create(title: 'What is your favorite color', body: 'blue...no yelllooowww',user_id: 1, category_id: 3)
+Question.create(title: 'what is the average velocity of a mongoose', body: 'african or european',user_id: 1, category_id: 4)
 
 
 Category.create()
@@ -27,5 +27,3 @@ Category.create(name: "C++")
 Category.create(name: "CSS")
 Category.create(name: "Binary")
 Category.create(name: "Robot Tinder")
-
-

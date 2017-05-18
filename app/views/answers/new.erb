@@ -1,0 +1,7 @@
+<div class='container'>
+   <form action="/questions/<%= @question.id.to_s%>/answers" method="POST">
+     <label for="answer"> Answer: </label>
+     <textarea cols='60' rows='10' name="[answer]body" id='body'></textarea>
+     <input type="submit" value="Submit Answer">
+  </form>
+</div>
