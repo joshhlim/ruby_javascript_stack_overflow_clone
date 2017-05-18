@@ -16,12 +16,18 @@
   left: 46%;
 }
 
+
 /*category show name*/
 .category-name {
   text-align: center;
   border-bottom: 2px solid grey;
 }
 
-form {
-  text-align: center;
+.inline {
+  display: inline;
 }
+
+
+/*form {
+  text-align: center;
+}*/
