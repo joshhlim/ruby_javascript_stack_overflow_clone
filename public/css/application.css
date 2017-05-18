@@ -17,6 +17,12 @@ body {
   align-items: center;
   justify-content: center; }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
 .font-md {
   font-size: 1.2em; }
 
@@ -46,5 +52,20 @@ body {
 .main-nav-li {
   height: 100%;
   padding: 0 20px; }
+
+.main-container {
+  width: 100%; }
+
+.sub-container {
+  max-width: 960px;
+  width: 80%;
+  margin: 5% 0; }
+
+.pipe-separate {
+  padding: 0 20px;
+  border-right: solid 1px lightgrey; }
+
+.left {
+  left: 0; }
 
 /*# sourceMappingURL=application.css.map */

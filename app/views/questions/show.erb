@@ -1,6 +1,8 @@
-<h1><%= question.title %></h1>
-<% if session[:id] == question.questioner_id %>
-  <a href="questions/<%=question.id%>/edit">Edit Question</a>
-  <a href="questions/<%=question.id%>">Delete Question</a>
-<% end %>
-<p><%= question.body %></p>
+<div class="sub-container">
+  <h1><%= question.title %></h1>
+  <% if session[:id] == question.questioner_id %>
+    <a href="questions/<%=question.id%>/edit">Edit Question</a>
+    <a href="questions/<%=question.id%>">Delete Question</a>
+  <% end %>
+  <p><%= question.body %></p>
+</div>
