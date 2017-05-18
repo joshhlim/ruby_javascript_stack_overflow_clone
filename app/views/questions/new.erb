@@ -1,0 +1,15 @@
+<div class='container'>
+   <form action="/questions" method="POST">
+     <label for="categories"> Language: </label>
+     <select id='category_dropdown' name='category'>
+        <% @categories.each do |category| %>
+          <option name='category' value=<%= category.id %>><%= category.name %></option>
+        <% end %>
+     </select>
+     <label for="title"> Question: </label>
+     <input type="text" name="[question]title" id='title'>
+     <label for="body"> Body: </label>
+     <textarea cols='60' rows='10' name="[question]body" id='body'></textarea>
+     <input type="submit" value="Submit Question">
+  </form>
+</div>
