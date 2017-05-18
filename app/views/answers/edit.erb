@@ -3,7 +3,7 @@
 <span><%= "Asked by #{@question.questioner} on #{long_form_date(@question.created_at)}" %></span>
 
 <div>
-<form method="post" action="/questions/<%= @question.id %>/answers">
+<form method="post" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>">
   <input type="hidden" name="_method" value="put">
   <label for="body-textarea">Reply:</label>
   <textarea id="body-textarea" name="answer[body]"><%= @answer.try(:body) %></textarea>

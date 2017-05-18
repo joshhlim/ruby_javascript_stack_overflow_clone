@@ -1,6 +1,9 @@
 get '/questions/:id/answers' do
   @question = Question.find(params[:id])
   @answers = @question.answers
+  puts "^^^^^^^^^^^^^^^^^^^^^^^^"
+  p @answers
+  puts "&&&&&&&&&&&&&&&&&&&"
   erb :'answers/index'
 end
 
@@ -12,9 +15,9 @@ end
 post '/questions/:id/answers' do
   @question = Question.find(params[:id])
   @answer = Answer.new(params[:answer])
-  @answer.assign_attributes(question_id: @question.id)
+  @answer.assign_attributes(question_id: @question.id, answerer_id: session[:id])
   @answer.save
-  redirect '/questions/:id/answers'
+  redirect "/questions/#{@question.id}/answers"
 end
 
 # don't need to show indiv answer unless editing
@@ -34,11 +37,11 @@ put '/questions/:id/answers/:answer_id' do
   @question = Question.find(params[:id])
   @answer = Answer.find(params[:answer_id])
   @answer.update_attributes(params[:answer])
-  redirect '/questions/:id/answers'
+  redirect "/questions/#{@question.id}/answers"
 end
 
 delete '/questions/:id/answers/:answer_id' do
   @answer = Answer.find(params[:answer_id])
   @answer.destroy
-  redirect '/questions/:id/answers'
+  redirect "/questions/#{params[:id]}/answers"
 end
