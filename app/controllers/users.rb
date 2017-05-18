@@ -33,8 +33,8 @@ get '/users/new' do
 end
 
 get '/users/:id' do
-  @user = User.find(params[:id])
-  erb :'users/profile', :locals => {user: @user}
+  new_user = User.find(params[:id])
+  erb :'users/profile', :locals => {user: new_user}
 end
 
 post '/users' do
