@@ -19,13 +19,20 @@ get '/questions/:id' do
 end
 
 get '/questions/:id/edit' do
-
+  question = Question.find(params[:id])
+  erb :'questions/edit', :locals => {question: question}
 end
 
 put '/questions/:id' do
-
+  question = Question.find(params[:id])
+  puts "^^^^^^^^^^^^^^^^^^^"
+  p params
+  puts "^^^^^^^^^^^^^^^^^^^"
+  question.update(title: params[:title], body: params[:body])
+  redirect "/questions/#{question.id}"
 end
 
 delete '/questions/:id' do
-
+  Question.destroy(params[:id])
+  redirect "/"
 end
