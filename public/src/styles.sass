@@ -11,7 +11,10 @@ $dark-orange: #f4aa42
 // ========== II. General Tags ==========
 body
   font-family: $primary-font
-
+p
+  font-size: 1.1em
+  letter-spacing: 0.02em
+  line-height: 1.4em
 
 // ========== III. Styling Classes ==========
 .flex-row
@@ -62,18 +65,17 @@ body
 
 
 // ========== b. Main Content ==========
-
 // a. Universal
 .main-container
   width: 100%
 .sub-container
-  max-width: 960px
+  max-width: 900px
   width: 80%
   margin: 20px 0
 
 // b. Questions - Index
 .question-data-stats
-  background-color: silver
+  background-color: whitesmoke
   display: inline-block
   padding: 5px
   box-sizing: border-box
@@ -89,6 +91,16 @@ body
   color: steelblue
 .question-link:hover
   color: lightsteelblue
+
+// Questions - Show
+.questioner-buttons
+  display: inline-block
+.answer-form
+  width: 100%
+  align-items: flex-start
+.body-textarea
+  width: 100%
+  height: 300px
 
 
 
