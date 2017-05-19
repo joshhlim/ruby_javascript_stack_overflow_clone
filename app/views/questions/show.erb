@@ -38,8 +38,38 @@
   <a href='/questions/<%= @question.id %>/comments/new' class='question_comment'>add a comment</a>
   <% end %>
 </div>
+
+
 <h2><%= @question.answers.count %> Answers</h2>
-<% @question.answers.each do |answer| %>
+<% @answers.each_with_index do |answer, index| %>
+ <% if index == 0 %>
+   <article id="answer<%= answer.id %>" class='answer'>
+     <span><%= answer.body %></span> </br>
+     <% @voted_answer = Vote.find_by(voteable_type: "Answer", voteable_id: answer.id, user_id: session[:id]) %>
+     <% if @voted_answer %>
+       <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+   <% else %>
+      <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/vote" method = "POST" class= "inline">
+        <button type="submit" class="btn btn-success btn-xs vote-answer-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+     </form>
+   <% end %>
+   <span class="count-answer"> <%= answer.votes.count %> votes || </span>
+   <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
+   <button type="button" class="btn btn-warning inline"><span class="glyphicon glyphicon-fire"></span> Popular Answer</button> </br>
+
+    <h4><%= answer.comments.count %> Comments</h4>
+   <ul>
+     <% answer.comments.each do |comment| %>
+       <li><%= comment.body %><br><%= comment.user.username%></li>
+     <% end %>
+   </ul>
+ </article>
+ <div>
+   <% if session[:id] %>
+     <a href='/answers/<%= answer.id %>/comments/new' class='answer_comment'>add a comment</a>
+   <% end %>
+ </div>
+ <% else %>
   <article id="answer<%= answer.id %>" class='answer'>
     <span><%= answer.body %></span> </br>
     <% @voted_answer = Vote.find_by(voteable_type: "Answer", voteable_id: answer.id, user_id: session[:id]) %>
@@ -65,6 +95,7 @@
       <a href='/answers/<%= answer.id %>/comments/new' class='answer_comment'>add a comment</a>
     <% end %>
   </div>
+  <% end %>
 <% end %>
 
 <div>

@@ -63,3 +63,7 @@
 .search-form {
   text-align: center;
 }
+
+.btn-warning {
+  float: right
+}
