@@ -11,6 +11,7 @@
   <div>votes</div>
 <div class="sub-container">
   <h1><%= question.title %></h1>
+
   <% if session[:id] == question.questioner_id %>
     <form class="questioner-buttons" action="<%=question.id%>/edit">
       <input type="submit" value="Edit Question"/>
@@ -20,6 +21,7 @@
       <input type="submit" value="Delete question">
     </form>
   <% end %>
+
   <p><%= question.body %></p>
 
   <h2>Answers</h2>
@@ -31,20 +33,24 @@
       <input type="submit" value="Respond">
     </form>
   </div>
-
+  
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
       <li><%= comment.body %></li>
     <% end %>
   </ul>
+
   <a href="/questions/<%= question.id %>/answers/new">Answer this question</a>
   <a id="question-comment-link" href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
+
   <form id="question-comment-form" action="/questions/<%= question.id %>/comments" method="POST">
-  <textarea rows="3" cols="40" name="body" placeholder="Enter comment..."></textarea>
-  <input type="submit">
-</form>
+    <textarea rows="3" cols="40" name="body" placeholder="Enter comment..."></textarea>
+    <input type="submit">
+  </form>
+
   </br></br>
-  <ul>
+
+  <ul class="question-answers">
     <% question.answers.each do |answer| %>
       <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
         <ul id="answer-comment-ul">
@@ -53,11 +59,11 @@
           <% end %>
         </ul>
       <div>
-      <a id="answer-comment-link" href="/questions/<%= question.id %>/answers/<%= answer.id %>/comments/new">Comment on this answer</a>
-              <form class="answer-comment-form" action="/questions/<%= question.id %>/answers/<%= answer.id %>/comments" method="POST">
-        <textarea rows="3" cols="40" name="body" placeholder="Enter comment..."></textarea>
-        <input type="submit">
-      </form>
+        <a id="answer-comment-link" href="/questions/<%= question.id %>/answers/<%= answer.id %>/comments/new">Comment on this answer</a>
+        <form class="answer-comment-form" action="/questions/<%= question.id %>/answers/<%= answer.id %>/comments" method="POST">
+          <textarea rows="3" cols="40" name="body" placeholder="Enter comment..."></textarea>
+          <input type="submit">
+        </form>
       </div>
     <% end %>
   </ul>
