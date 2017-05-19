@@ -52,3 +52,6 @@
 <% if session[:id] %>
   <h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
 <% end %>
+<% if @question.user.id == session[:id] %>
+<div><a href="/questions/<%= @question.id %>/edit">Update Question</a></div>
+<% end %>

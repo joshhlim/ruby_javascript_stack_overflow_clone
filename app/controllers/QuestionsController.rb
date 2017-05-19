@@ -62,19 +62,25 @@ end
 
 # edit
 get '/questions/:id/edit' do
-
+  @categories = Category.all 
+  @question = Question.find(params[:id])
+  erb :'questions/update_question'
 end
 
 # update
 put '/questions/:id' do
-
+  @categories = Category.all
+  @question = Question.find(params[:id])
+  @question.update_attributes(params[:question])
+  @question.save
+  redirect "/questions/#{@question.id}"
 end
 
 # delete
 delete '/questions/:id' do
-   question = Question.find_by(id: params[:id])
-   question.destroy
-   redirect '/'
+  question = Question.find_by(id: params[:id])
+  question.destroy
+  redirect '/'
 end
 
 # new answer
