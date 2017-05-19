@@ -10,11 +10,13 @@
  </form>
    <span class="count"> <%= @question.votes.count %> votes || </span>
    <span> author: <%= @question.user.username %> ||</span>
-   <span> <%= @question.comments.count %> comments || </span>
-   <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
-       <input type="hidden" name="_method" value="DELETE" />
-       <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
-   </form>
+   <span> <%= @question.comments.count %> comments </span>
+   <% if @question.user.id == session[:id] %>
+     <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+    </form>
+   <% end %>
 </article>
 <h3><%= @question.comments.count %> Comments</h3>
 <ul>
