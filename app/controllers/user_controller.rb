@@ -3,6 +3,7 @@ get '/users/new' do
   erb :'users/new'
 end
 
+#new user post
 post '/users' do
   @user = User.create(params[:user])
   if @user.save
@@ -18,6 +19,7 @@ post '/users' do
    erb :'users/login'
  end
 
+#login user post
  post '/users/login' do
    @user = User.find_by(username: params[:user][:username])
    if @user && @user.authenticate(params[:user][:password])
@@ -46,4 +48,18 @@ get '/users/:id' do
 end
 
 
+#edit profile get
+get '/users/:id/edit' do 
+  @user = User.find(params[:id])
+  erb :'users/update_user'
+end
 
+#update profile post
+put '/users/:id' do 
+  @user = User.find(params[:id])
+  @user.update_attributes(params[:user])
+  @user.password
+  @user.save
+
+  redirect "/users/#{@user.id}"
+end
