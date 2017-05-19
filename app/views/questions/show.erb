@@ -48,9 +48,11 @@
       <% end %>
     </ul>
   </article>
-  <% if session[:id] %>
-    <a href='/answers/<%= answer.id %>/comments/new'>add a comment</a>
-  <% end %>
+  <div>
+    <% if session[:id] %>
+      <a href='/answers/<%= answer.id %>/comments/new' class='answer_comment'>add a comment</a>
+    <% end %>
+  </div>
 <% end %>
 
 <div>
