@@ -190,4 +190,22 @@ $(document).ready(function() {
       })
   })
 
+  // $(".best-answer-form").submit(function(e) {
+  //   e.preventDefault();
+  //   var $form = $(this);
+  //   var $img = $form.closest("span");
+  //   console.log($img);
+  //   var link = $(this).attr("action");
+  //   $.ajax({
+  //     method: "PUT",
+  //     url: link,
+  //   })
+  //     .done(function(response) {
+  //       $(".best-answer-image").hide();
+  //       console.log($form.closest("#best-answer-div"))
+  //       $form.closest("span").find("img").show();
+  //     })
+  // })
+
+
 });
