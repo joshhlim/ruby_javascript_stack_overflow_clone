@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
 // questions/show (submit an answer form)
 // ~ default answer-form to hidden
   $(".question-page-answer-form").hide()
@@ -26,10 +25,9 @@ $(document).ready(function() {
       $(".question-answers").append(response);
       // ~ rehide form, reshow answer button
       $("#question-page-answer-button").show();
-      $(".question-page-answer-form").hide()
+      $that.hide()
     })
   });
-
 
 
   $("#question-comment-form").hide();

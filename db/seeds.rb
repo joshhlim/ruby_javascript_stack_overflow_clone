@@ -10,7 +10,9 @@ require 'faker'
     title = Faker::Lorem.sentence
     question = Faker::Lorem.paragraphs(2).join('')
     Question.create(title: title, body: question, questioner_id: user.id)
+    sleep(1)
   end
+  sleep(2)
 end
 
 # For each question, generate 3 answers
@@ -20,5 +22,7 @@ Question.all.each do |question|
   user = User.where.not(id: question.questioner_id).sample
   answer = Faker::Lorem.paragraphs(2).join('')
   Answer.create(body: answer, answerer_id: user.id, question_id: question.id)
+  sleep(1)
   end
+  sleep(2)
 end
