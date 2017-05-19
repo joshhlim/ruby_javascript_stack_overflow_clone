@@ -7,6 +7,8 @@ $(document).ready(function() {
     $("#question-comment-form").show();
   })
 
+
+
   $("#question-comment-form").submit(function(e) {
     e.preventDefault();
     var link = $(this).attr("action");
