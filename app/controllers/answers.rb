@@ -32,7 +32,13 @@ put '/questions/:id/answers/:answer_id/bestanswer' do
   answers = Question.find(params[:id]).answers.all
   Answer.reset_best_answer(answers)
   Answer.find(params[:answer_id]).update_attributes(best_answer: 1)
-  redirect "/questions/#{params[:id]}"
+
+  if request.xhr?
+    "http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png"
+  else
+    redirect "/questions/#{params[:id]}"
+  end
+
 end
 
 get '/questions/:id/answers/:answer_id/edit' do
