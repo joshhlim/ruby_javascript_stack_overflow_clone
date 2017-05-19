@@ -119,4 +119,11 @@ p {
 .left {
   left: 0; }
 
+#question-comment-form {
+  display: none;
+}
+
+.answer-comment-form {
+  display: none;
+}
 /*# sourceMappingURL=application.css.map */
