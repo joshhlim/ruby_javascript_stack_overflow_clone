@@ -30,9 +30,13 @@
 
 <h2><%= @question.answers.count %> Answers</h2>
 <% @question.answers.each do |answer| %>
-  <div class='answer'
-    <p><%= answer.body %></p>
-    <p class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></p>
+  <article id="answer<%= answer.id %>" class='answer'>
+    <span><%= answer.body %></span> </br>
+    <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/vote" method = "POST" class= "inline">
+      <button type="submit" class="btn btn-success btn-xs vote-answer-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+    </form>
+    <span class="count-answer"> <%= answer.votes.count %> votes || </span>
+    <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
 
     <h3><%= answer.comments.count %> Comments</h3>
     <ul>
@@ -40,7 +44,7 @@
         <li><%= comment.body %><br><%= comment.user.username%></li>
       <% end %>
     </ul>
-  </div>
+  </article>
   <% if session[:id] %>
     <a href='/answers/<%= answer.id %>/comments/new'>add a comment</a>
   <% end %>
