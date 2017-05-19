@@ -47,6 +47,16 @@
 
   <h2>Answers</h2>
 
+<<<<<<< HEAD
+=======
+  <div class="flex-column">
+    <form class="answer-form flex-column" method="post" action="/questions/<%= question.id %>/answers">
+      <label for="body-textarea">Your Answer:</label>
+      <textarea class="body-textarea" name="answer[body]"></textarea>
+      <input type="submit" value="Respond">
+    </form>
+  </div>
+>>>>>>> tallpaulhandler
 
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
@@ -79,6 +89,7 @@
   <ul class="question-answers">
     <% question.answers.each do |answer| %>
       <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+
         <ul id="answer-comment-ul">
           <% answer.comments.each do |comment| %>
             <% if logged_in? %>

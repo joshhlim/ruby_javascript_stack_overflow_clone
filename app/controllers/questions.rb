@@ -25,9 +25,6 @@ end
 
 put '/questions/:id' do
   question = Question.find(params[:id])
-  puts "^^^^^^^^^^^^^^^^^^^"
-  p params
-  puts "^^^^^^^^^^^^^^^^^^^"
   question.update(title: params[:title], body: params[:body])
   redirect "/questions/#{question.id}"
 end
