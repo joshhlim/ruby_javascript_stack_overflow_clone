@@ -12,14 +12,6 @@
   <p><%= question.body %></p>
 
   <h2>Answers</h2>
-  <% if question.answers %>
-    <% question.answers.each do |answer| %>
-      <div class="questions-answers">
-        <p><%= answer.body %></p>
-        <p>answered by <a href="/users/<%= answer.answerer.id %>" class="question-link"><%= answer.answerer.username %></a></p>
-      </div>
-    <% end %>
-  <% end %>
 
   <div class="flex-column">
     <form class="answer-form flex-column" method="post" action="/questions/<%= question.id %>/answers">
@@ -29,5 +21,25 @@
     </form>
   </div>
 
+  <ul id="question-comment-ul">
+    <% question.comments.each do |comment| %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
+  <a href="/questions/<%= question.id %>/answers/new">Answer this question</a>
+  <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
+  </br></br>
+  <ul>
+    <% question.answers.each do |answer| %>
+      <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+        <ul>
+          <% answer.comments.each do |comment| %>
+            <li><%= comment.body %> - <%= (User.find(session[:id])).username %></li>
+          <% end %>
+        </ul>
+      <a href="/questions/<%= question.id %>/answers/<%= answer.id %>/comments/new">Comment on this answer</a>
+
+    <% end %>
+  </ul>
 </div>
 
