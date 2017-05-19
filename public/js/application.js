@@ -31,18 +31,32 @@ $(document).ready(function() {
     })
   });
 
-  $('div').on('submit', '.submit_question_comment', function(e){
+  $('div').on('click', '.answer_comment', function(e){
     e.preventDefault()
-    var path = $(this).attr('action')
-    var data = $(this).serialize()
     var that = $(this)
-    console.log("Path is " + path)
+    var path = $(this).attr('href')
     $.ajax({
-      method: "POST",
       url: path,
-      data: data
+      dataType: "html"
     }).done(function(response){
-      $(that).parent().hide()
+      that.before(response)
     })
   });
+
+  // $('div').on('submit', '.submit_question_comment', function(e){
+  //   e.preventDefault()
+  //   var path = $(this).attr('action')
+  //   var data = $(this).serialize()
+  //   var that = $(this)
+  //   console.log("Path is " + path)
+  //   $.ajax({
+  //     method: "post",
+  //     url: path,
+  //     data: data
+  //   }).done(function(response){
+  //     console.log("Response is " + response)
+  //     $(that).parent().hide()
+  //     $('.q-comments').child().append(response)
+  //   })
+  // });
 });

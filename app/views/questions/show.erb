@@ -17,7 +17,7 @@
    </form>
 </article>
 <h4><%= @question.comments.count %> Comments</h4>
-<ul>
+<ul class='q_comments'>
   <% @question.comments.each do |comment| %>
   <li><%= comment.body %><br><%= comment.user.username%></li>
   <% end %>
@@ -40,9 +40,11 @@
       <% end %>
     </ul>
   </div>
-  <% if session[:id] %>
-    <a href='/answers/<%= answer.id %>/comments/new'>add a comment</a>
-  <% end %>
+  <div>
+    <% if session[:id] %>
+      <a href='/answers/<%= answer.id %>/comments/new' class='answer_comment'>add a comment</a>
+    <% end %>
+  </div>
 <% end %>
 <% if session[:id] %>
   <h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>

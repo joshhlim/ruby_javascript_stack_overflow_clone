@@ -99,17 +99,18 @@ post '/questions/:id/comments' do
     commentable_type: 'Question',
     commentable_id: params[:id],
     user_id: session[:id])
-  if request.xhr?
-    "<li><%= comment.body %><br><%= comment.user.username%></li>"
-  else
+
     redirect :"questions/#{params[:id]}"
-  end
 end
 
 get '/answers/:id/comments/new' do
   if session[:id]
     @answer = Answer.find(params[:id])
-    erb :'answers/new_comment'
+    if request.xhr?
+      erb :'answers/new_comment', layout: false
+    else
+      erb :'answers/new_comment'
+    end
   else
     redirect '/'
   end
