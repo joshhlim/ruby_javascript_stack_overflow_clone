@@ -14,7 +14,7 @@ post '/questions/:id/answers' do
   @answer = Answer.new(params[:answer])
   @answer.assign_attributes(question_id: @question.id, answerer_id: session[:id])
   @answer.save
-  redirect "/questions/#{@question.id}/answers"
+  redirect "/questions/#{@question.id}"
 end
 
 # don't need to show indiv answer unless editing
