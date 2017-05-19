@@ -3,13 +3,18 @@
 <div class='question-content'>
   <p class='question-body'><%= @question.body %></p>
 </div>
-<form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
-  <button class = "upvote-button" type="submit" name="Upvote!"></button>
-</form>
- <span> <%= @question.votes.count %> votes || </span>
- <span> author: <%= @question.user.username %> ||</span>
- <span> <%= @question.comments.count %> comments || </span>
- <a class="delete" href='/questions/<%= @question.id %>'>delete this question</a>
+
+  <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
+    <button type="submit" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+ </form>
+   <span> <%= @question.votes.count %> votes || </span>
+   <span> author: <%= @question.user.username %> ||</span>
+   <span> <%= @question.comments.count %> comments || </span>
+   <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
+       <input type="hidden" name="_method" value="DELETE" />
+       <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+   </form>
+<p class='question-body'><%= @question.body %></p>
 
 <h3><%= @question.comments.count %> Comments</h3>
 <ul>
