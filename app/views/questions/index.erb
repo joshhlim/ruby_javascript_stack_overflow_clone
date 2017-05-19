@@ -2,9 +2,11 @@
   <h2>Questions</h2>
   <ul>
     <% questions.each do |question| %>
+      <li id="home-questions-li"><a href=questions/<%=question.id%>><%= question.title %></a></li>
+
       <li class="home-questions-li">
         <div class="home-questions-left question-data">
-          <p class="question-data-stats"><%= question.votes.count %><br>votes</p>
+          <p class="question-data-stats"><%= question.points %><br>votes</p>
           <p class="question-data-stats"><%= question.answers.count %><br>answers</p>
         </div>
         <div class="home-questions-right">
@@ -15,6 +17,7 @@
           </div>
         </div>
       </li>
+
     <% end %>
   </ul>
 </div>
