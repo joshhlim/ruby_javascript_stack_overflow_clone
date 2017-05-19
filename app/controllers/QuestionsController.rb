@@ -32,10 +32,14 @@ post '/questions/:id/vote' do
  # @repeater = Vote.find_by(user_id: session[:id]).voteable_id
  # if @repeater.include?(params[:id])
   @question = Question.find_by(id: params[:id])
+  puts @question
   @category = @question.category
-  @vote = Vote.new(voteable_type: Question, voteable_id: params[:id], user_id: session[:id])
+  puts "category #{@category}"
+  @vote = Vote.new(voteable_type: "Question", voteable_id: params[:id], user_id: session[:id])
+  puts "vote #{@vote}"
   @vote.save
    if request.xhr?
+     puts "in xhr"
      content_type :json
      {id: @question.id, count: @question.votes.count}.to_json
    else
@@ -57,6 +61,7 @@ end
 # show
 get '/questions/:id' do
   @question = Question.find(params[:id])
+  @answers = @question.answers.top
   erb :'questions/show'
 end
 

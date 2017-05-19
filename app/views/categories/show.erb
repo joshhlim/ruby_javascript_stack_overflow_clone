@@ -14,7 +14,7 @@
         <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top icon"></span> </button>
       </form>
       <% end %>
-       <span class="count"> <%= q.votes.count %> votes || </span>
+       <span class="count"> <%= q.votes_count %> votes || </span>
        <span> author: <%= q.user.username %> ||</span>
        <span> <%= q.comments.count %> comments </span>
        <% if q.user.id == session[:id] %>

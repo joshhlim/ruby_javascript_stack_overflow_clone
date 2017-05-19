@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  scope :top,->(){ order('votes_count DESC') }
   validates :title, :body, presence: true
   belongs_to :user
   belongs_to :category
@@ -17,4 +18,3 @@ class Question < ActiveRecord::Base
     matches.uniq
   end
 end
-
