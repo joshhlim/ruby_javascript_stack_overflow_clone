@@ -17,7 +17,7 @@ post '/questions/:question_id/answer/:id/vote' do
   @question = Question.find_by(id: params[:question_id])
   @category = @question.category
   @answer = Answer.find_by(id: params[:id], question_id: params[:question_id])
-  @vote = Vote.new(voteable_type: Answer, voteable_id: params[:id])
+  @vote = Vote.new(voteable_type: Answer, voteable_id: params[:id], user_id: session[:id])
   @vote.save
    if request.xhr?
      content_type :json
@@ -32,10 +32,14 @@ post '/questions/:id/vote' do
  # @repeater = Vote.find_by(user_id: session[:id]).voteable_id
  # if @repeater.include?(params[:id])
   @question = Question.find_by(id: params[:id])
+  puts @question
   @category = @question.category
-  @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
+  puts "category #{@category}"
+  @vote = Vote.new(voteable_type: "Question", voteable_id: params[:id], user_id: session[:id])
+  puts "vote #{@vote}"
   @vote.save
    if request.xhr?
+     puts "in xhr"
      content_type :json
      {id: @question.id, count: @question.votes.count}.to_json
    else
@@ -58,7 +62,7 @@ end
 get '/questions/:id' do
   # puts params
   @question = Question.find(params[:id])
-  # @answer = Answer.find_by(user_id: session[:id])
+  @answers = @question.answers.top
   erb :'questions/show'
 end
 
@@ -78,18 +82,22 @@ put '/questions/:id' do
   redirect "/questions/#{@question.id}"
 end
 
-# delete
 delete '/questions/:id' do
-  question = Question.find_by(id: params[:id])
-  question.destroy
-  redirect '/'
+   @question = Question.find_by(id: params[:id])
+   @user = @question.user.id
+   @question.destroy
+   redirect to "/users/#{@user}"
 end
 
 # new answer
 get '/questions/:id/answers/new' do
   if session[:id]
     @question = Question.find(params[:id])
-    erb :'answers/new'
+    if request.xhr?
+      erb :'answers/new', layout: false
+    else
+      erb :'answers/new'
+    end
   else
     redirect '/'
   end
@@ -108,7 +116,11 @@ end
 get '/questions/:id/comments/new' do
   if session[:id]
     @question = Question.find(params[:id])
-    erb :'questions/new_comment'
+    if request.xhr?
+      erb :'questions/new_comment', layout: false
+    else
+      erb :'questions/new_comment'
+    end
   else
     redirect '/'
   end
@@ -121,13 +133,18 @@ post '/questions/:id/comments' do
     commentable_type: 'Question',
     commentable_id: params[:id],
     user_id: session[:id])
-  redirect :"questions/#{params[:id]}"
+
+    redirect :"questions/#{params[:id]}"
 end
 
 get '/answers/:id/comments/new' do
   if session[:id]
     @answer = Answer.find(params[:id])
-    erb :'answers/new_comment'
+    if request.xhr?
+      erb :'answers/new_comment', layout: false
+    else
+      erb :'answers/new_comment'
+    end
   else
     redirect '/'
   end
@@ -143,6 +160,7 @@ post '/answers/:id/comments' do
   redirect :"questions/#{answer.question.id}"
 end
 
+
 get '/questions/:question_id/answers/:id/edit' do 
   @answer = Answer.find(params[:id])
   erb :'answers/update_answer'
@@ -154,17 +172,4 @@ put '/questions/:question_id/answers/:id' do
   @answer.save
   redirect "/questions/#{@question.id}"
 end   
-
-
-
-
-
-
-
-
-
-
-
-
-
 

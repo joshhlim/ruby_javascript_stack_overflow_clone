@@ -1,4 +1,5 @@
 <div class='container'>
+
    <form action="/answers/<%= @answer.id.to_s%>/comments" method="POST">
 	    <label for="comment"> Comment: </label>
 	    <textarea cols='60' rows='10' name="[comment]body" id='body'></textarea>

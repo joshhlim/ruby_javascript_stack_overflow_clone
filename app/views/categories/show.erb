@@ -6,16 +6,21 @@
      <li class= "cat">
       <article id = "<%= q.id %>">
       <h3><a href="/questions/<%= q.id %>"> <%= q.title %></a></h3>
+      <% @voted = Vote.find_by(voteable_type: "Question", voteable_id: q.id, user_id: session[:id]) %>
+      <% if @voted %>
+        <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+      <% else %>
       <form action = "/questions/<%=q.id %>/vote" method = "POST" class= "inline">
         <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top icon"></span> </button>
       </form>
-       <span class="count"> <%= q.votes.count %> votes || </span>
+      <% end %>
+       <span class="count"> <%= q.votes_count %> votes || </span>
        <span> author: <%= q.user.username %> ||</span>
        <span> <%= q.comments.count %> comments </span>
        <% if q.user.id == session[:id] %>
-           <form action = "/questions/<%=q.id %>" method = "POST" class= "inline delete">
+           <form action = "/category/<%=@category.id %>" method = "POST" class= "inline delete">
              <input type="hidden" name="_method" value="DELETE" />
-             <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+             <button type="submit" class="btn btn-danger btn-xs delete-button"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
           </form>
       <% end %>
      </article>
