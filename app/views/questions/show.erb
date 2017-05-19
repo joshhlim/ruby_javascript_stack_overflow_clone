@@ -5,10 +5,17 @@
 </div>
 
 <article id = "<%= @question.id %>">
-  <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
-    <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
- </form>
- <span class="count"> <%= @question.votes.count %> votes || </span>
+
+  <% @voted_question = Vote.find_by(voteable_type: "Question", voteable_id: @question.id, user_id: session[:id]) %>
+  <% if @voted_question %>
+     <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+  <% else %>
+    <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
+      <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+   </form>
+  <% end %>
+   <span class="count"> <%= @question.votes.count %> votes || </span>
+
    <span> author: <%= @question.user.username %> ||</span>
 
    <span> <%= @question.comments.count %> comments </span>
@@ -35,9 +42,14 @@
 <% @question.answers.each do |answer| %>
   <article id="answer<%= answer.id %>" class='answer'>
     <span><%= answer.body %></span> </br>
-    <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/vote" method = "POST" class= "inline">
-      <button type="submit" class="btn btn-success btn-xs vote-answer-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
-    </form>
+    <% @voted_answer = Vote.find_by(voteable_type: "Answer", voteable_id: answer.id, user_id: session[:id]) %>
+    <% if @voted_answer %>
+      <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+    <% else %>
+      <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/vote" method = "POST" class= "inline">
+        <button type="submit" class="btn btn-success btn-xs vote-answer-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+      </form>
+    <% end %>
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
 

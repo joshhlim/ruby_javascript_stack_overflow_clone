@@ -15,7 +15,7 @@ $(document).ready(function() {
         $('#' + id).find(".vote-button").removeClass("btn-success btn-xs");
         $('#' + id).find(".vote-button").addClass("btn-danger btn-xs");
         alert("You voted")
-        $('#' + id).find(".count").text(response.count + "votes ||")
+        $('#' + id).find(".count").text(response.count + " votes ||")
       })
    })
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
          $('#' + id).find(".vote-answer-button").removeClass("btn-success btn-xs");
          $('#' + id).find(".vote-answer-button").addClass("btn-danger btn-xs");
          alert("You voted")
-         $('#' + id).find(".count-answer").text(response.count + "votes ||")
+         $('#' + id).find(".count-answer").text(response.count + " votes ||")
        })
     })
 });
