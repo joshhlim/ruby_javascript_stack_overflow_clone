@@ -51,3 +51,15 @@
   text-align: right;
 }
 
+.catlist {
+  list-style-type: none;
+}
+
+.cat {
+  background-color: #c5d0e2;
+  height: 97%;
+  width: 97%;
+  padding-top: 1px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}

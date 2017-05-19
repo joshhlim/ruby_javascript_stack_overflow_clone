@@ -1,18 +1,21 @@
 <h1 class="category-name"><%= @category.name %></h1>
 <p class=question-header> Questions about (<%= @category.name %>): </p>
-<div class=question-select>
-  <ul>
+<div class="jumbotron">
+  <ul class= "catlist">
     <% @category.questions.each do |q| %>
-     <li>
+     <li class= "cat">
       <article id = "<% q.id %>">
       <h3><a href="/questions/<%= q.id %>"> <%= q.title %></a></h3>
       <form action = "/questions/<%=q.id %>/vote" method = "POST" class= "inline">
-        <button class = "upvote-button" type="submit" name="Upvote!"></button>
+        <button type="submit" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
       </form>
        <span> <%= q.votes.count %> votes || </span>
        <span> author: <%= q.user.username %> ||</span>
        <span> <%= q.comments.count %> comments || </span>
-       <a class="delete" href='/questions/<%= q.id %>'>delete this question</a>
+       <form action = "/questions/<%=q.id %>" method = "POST" class= "inline delete">
+           <input type="hidden" name="_method" value="DELETE" />
+           <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+       </form>
      </article>
     </li>
     <% end %>

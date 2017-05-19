@@ -49,7 +49,9 @@ end
 
 # delete
 delete '/questions/:id' do
-
+   question = Question.find_by(id: params[:id])
+   question.destroy
+   redirect '/'
 end
 
 # new answer
