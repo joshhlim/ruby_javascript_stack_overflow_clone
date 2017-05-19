@@ -77,7 +77,7 @@
 
       <li class="answers-list">
         <span id="best-answer-div">
-          <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+          <li class="question-answer"><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
           <% if answer.best_answer? %><img class="best-answer-image" src="http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png" alt="Best" height="30" width="30">
           <% else %>
             <img class="best-answer-image" src="http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png" alt="Best" height="30" width="30" style="display: none">
@@ -91,11 +91,7 @@
         </span>
           <% end %>
       </li>
-        
-
-      <li class="question-answer"><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
-      <!-- MOVED THE ANSWER COMMENTS IN A PARTIAL LINKED WITHIN THE ANSWER PARTIAL OR ELSE THE 'COMMENT ON THIS ANSWER' PERSISTS WHEN ANSWER IS DELETED -->
-
+     
     <% end %>
   </ul>
 </div>
