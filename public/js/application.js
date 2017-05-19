@@ -77,4 +77,117 @@ $(document).ready(function() {
       $(".answer-comment-form").hide();
     })
   })
+
+  $(".q-upvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".q-downvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".qc-upvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".qc-downvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".a-upvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".a-downvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".ac-upvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+  $(".ac-downvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
 });

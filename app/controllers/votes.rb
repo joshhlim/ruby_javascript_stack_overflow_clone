@@ -7,7 +7,12 @@ post '/questions/:id/vote' do
   else total_value == 1
     votes.create(value: -1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    question.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/downvote' do
@@ -19,7 +24,12 @@ post '/questions/:id/downvote' do
   else total_value == -1
     votes.create(value: 1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    question.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/comments/:comment_id/vote' do
@@ -31,7 +41,12 @@ post '/questions/:id/comments/:comment_id/vote' do
   else total_value == 1
     votes.create(value: -1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    comment.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/comments/:comment_id/downvote' do
@@ -43,7 +58,12 @@ post '/questions/:id/comments/:comment_id/downvote' do
   else total_value == -1
     votes.create(value: 1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    comment.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/answers/:answer_id/vote' do
@@ -55,7 +75,12 @@ post '/questions/:id/answers/:answer_id/vote' do
   else total_value == 1
     votes.create(value: -1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    answer.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/answers/:answer_id/downvote' do
@@ -67,7 +92,12 @@ post '/questions/:id/answers/:answer_id/downvote' do
   else total_value == -1
     votes.create(value: 1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    answer.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/answers/:answer_id/comments/:comment_id/vote' do
@@ -79,7 +109,12 @@ post '/questions/:id/answers/:answer_id/comments/:comment_id/vote' do
   else total_value == 1
     votes.create(value: -1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    comment.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 post '/questions/:id/answers/:answer_id/comments/:comment_id/downvote' do
@@ -91,5 +126,10 @@ post '/questions/:id/answers/:answer_id/comments/:comment_id/downvote' do
   else total_value == -1
     votes.create(value: 1, user: current_user)
   end
-  redirect "/questions/#{params[:id]}"
+  if request.xhr?
+    content_type :json
+    comment.points.to_json
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
