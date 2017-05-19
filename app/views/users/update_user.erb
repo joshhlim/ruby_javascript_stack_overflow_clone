@@ -1,5 +1,6 @@
 <div class = container>
-   <form action = "/users" class="form-inline" method="POST">
+   <form action = "/users/<%= @user.id %>" class="form-inline" method="POST"/>
+   <input type="hidden" name="_method" value="put"/>
     <div class="form-group">
      <label for = "username"> New Username: </label>
      <input class="form-control" type = "text" name = "[user]username" id = username>

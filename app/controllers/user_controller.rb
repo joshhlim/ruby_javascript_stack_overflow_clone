@@ -49,13 +49,13 @@ end
 
 
 #edit profile get
-get 'users/:id/edit' do 
+get '/users/:id/edit' do 
   @user = User.find(params[:id])
   erb :'users/update_user'
 end
 
 #update profile post
-put 'users/:id' do 
+put '/users/:id' do 
   @user = User.find(params[:id])
   @user.update_attributes(params[:user])
   @user.password
