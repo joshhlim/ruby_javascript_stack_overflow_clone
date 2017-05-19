@@ -40,9 +40,8 @@ get '/users/:id' do
   erb :'users/login' unless session[:id]
   @user = User.find(params[:id])
   @questions = @user.questions
-  @answers  = @user.answers
-  @question_comments = @user.comments.where(commentable_type: "Question")
-  @answer_comments = @user.comments.where(commentable_type: "Answer")
+  @answers  = @user.answers.to_a.uniq{ |a| a.question_id }
+  @comments = @user.comments.to_a.uniq{ |c| c.commentable_type == "Answer" ? c.commentable.question_id : c.commentable_id}
 
   erb :'users/profile'
 end

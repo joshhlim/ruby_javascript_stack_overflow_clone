@@ -28,6 +28,7 @@ $(document).ready(function() {
       dataType: "html"
     }).done(function(response){
       that.before(response)
+      that.hide()
     })
   });
 
@@ -40,6 +41,7 @@ $(document).ready(function() {
       dataType: "html"
     }).done(function(response){
       that.before(response)
+      that.hide()
     })
   });
 
