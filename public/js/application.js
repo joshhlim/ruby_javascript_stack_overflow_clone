@@ -220,13 +220,14 @@ $(document).ready(function() {
     e.preventDefault();
     var link = $(this).attr("action");
     var data = $(this).serialize();
+    var $this = $(this)
     $.ajax({
       method: "POST",
       url: link,
       data: data
     })
     .done(function(response) {
-      $("#answer-comment-ul").prepend(response)
+      $this.closest(".question-answer").find("#answer-comment-ul").append(response)
       $(".answer-comment-form").hide();
     })
   })
