@@ -1,11 +1,11 @@
 module QuestionsHelper
 
   def questions_by_highest_vote
-    Question.all.sort_by{ |q| q.points }
+    Question.all.sort_by{ |q| q.points }.reverse
   end
 
   def questions_by_most_recent
-    Question.all.sort_by{ |q| q.created_at }
+    Question.all.sort_by{ |q| q.created_at }.reverse
   end
 
   def questions_by_trending
