@@ -1,9 +1,23 @@
-<div class="sub-container">
+<div class="sub-container flex-column">
+  <h2>Questions</h2>
   <ul>
     <% questions.each do |question| %>
-      <div class="votes"><%= question.points %></div>
-      <div>votes</div>
       <li id="home-questions-li"><a href=questions/<%=question.id%>><%= question.title %></a></li>
+
+      <li class="home-questions-li">
+        <div class="home-questions-left question-data">
+          <p class="question-data-stats"><%= question.points %><br>votes</p>
+          <p class="question-data-stats"><%= question.answers.count %><br>answers</p>
+        </div>
+        <div class="home-questions-right">
+          <a href=questions/<%=question.id%> class="question-link"><%= question.title %></a>
+          <div>
+            <span class="question-data-user">Asked at <%= question.created_at %></span>
+            <span class="question-data-user">by <a href="/users/<%= question.questioner.id %>" class="question-link"><%= question.questioner.username %></a></span>
+          </div>
+        </div>
+      </li>
+
     <% end %>
   </ul>
 </div>

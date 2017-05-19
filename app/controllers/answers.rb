@@ -1,9 +1,6 @@
 get '/questions/:id/answers' do
   @question = Question.find(params[:id])
   @answers = @question.answers
-  puts "^^^^^^^^^^^^^^^^^^^^^^^^"
-  p @answers
-  puts "&&&&&&&&&&&&&&&&&&&"
   erb :'answers/index'
 end
 
