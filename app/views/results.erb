@@ -1,0 +1,16 @@
+<h1>Search Results</h1>
+<div>
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Question</th>
+      <th>Date</th>
+    </tr>
+    <% all_questions.each do |question| %>
+    <tr>
+      <td><%= question.category.name %></td>
+      <td><a href="/questions/<%= question.id %>"><%= question.title %></a></td>
+      # need to keep working from here using the table in the profile.erb
+    </tr>
+  </table>
+</div>
