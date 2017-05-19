@@ -15,7 +15,6 @@
        <input type="hidden" name="_method" value="DELETE" />
        <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
    </form>
-<p class='question-body'><%= @question.body %></p>
 </article>
 <h3><%= @question.comments.count %> Comments</h3>
 <ul>
@@ -23,7 +22,9 @@
     <li><%= comment.body %><br><%= comment.user.username%></li>
   <% end %>
 </ul>
-<a href='/questions/<%= @question.id %>/comments/new'>add a comment</a>
+<% if session[:id] %>
+  <a href='/questions/<%= @question.id %>/comments/new'>add a comment</a>
+<% end %>
 
 <h2><%= @question.answers.count %> Answers</h2>
 <% @question.answers.each do |answer| %>
@@ -38,7 +39,10 @@
       <% end %>
     </ul>
   </div>
-  <a href='/answers/<%= answer.id %>/comments/new'>add a comment</a>
+  <% if session[:id] %>
+    <a href='/answers/<%= answer.id %>/comments/new'>add a comment</a>
+  <% end %>
 <% end %>
-
-<h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
+<% if session[:id] %>
+  <h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
+<% end %>

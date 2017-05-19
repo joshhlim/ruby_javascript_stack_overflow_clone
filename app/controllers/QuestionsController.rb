@@ -61,8 +61,12 @@ end
 
 # new answer
 get '/questions/:id/answers/new' do
-  @question = Question.find(params[:id])
-  erb :'answers/new'
+  if session[:id]
+    @question = Question.find(params[:id])
+    erb :'answers/new'
+  else
+    redirect '/'
+  end
 end
 
 # create answer
@@ -76,9 +80,12 @@ post '/questions/:id/answers' do
 end
 
 get '/questions/:id/comments/new' do
-  puts params
-  @question = Question.find(params[:id])
-  erb :'questions/new_comment'
+  if session[:id]
+    @question = Question.find(params[:id])
+    erb :'questions/new_comment'
+  else
+    redirect '/'
+  end
 end
 
 post '/questions/:id/comments' do
@@ -92,8 +99,12 @@ post '/questions/:id/comments' do
 end
 
 get '/answers/:id/comments/new' do
-  @answer = Answer.find(params[:id])
-  erb :'answers/new_comment'
+  if session[:id]
+    @answer = Answer.find(params[:id])
+    erb :'answers/new_comment'
+  else
+    redirect '/'
+  end
 end
 
 post '/answers/:id/comments' do
@@ -103,5 +114,5 @@ post '/answers/:id/comments' do
     commentable_type: 'Answer',
     commentable_id: params[:id],
     user_id: session[:id])
-  redirect :"questions/#{params[:id]}"
+  redirect :"questions/#{answer.question.id}"
 end
