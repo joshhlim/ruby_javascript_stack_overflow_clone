@@ -19,6 +19,42 @@ $(document).ready(function() {
       })
    })
 
+  $('div').on('click', '.question_comment', function(e){
+    e.preventDefault()
+    var that = $(this)
+    var path = $(this).attr('href')
+    $.ajax({
+      url: path,
+      dataType: "html"
+    }).done(function(response){
+      that.before(response)
+    })
+  });
+
+  $('div').on('click', '.answer_comment', function(e){
+    e.preventDefault()
+    var that = $(this)
+    var path = $(this).attr('href')
+    $.ajax({
+      url: path,
+      dataType: "html"
+    }).done(function(response){
+      that.before(response)
+    })
+  });
+
+  $('div').on('click', '.answer_question', function(e){
+    e.preventDefault()
+    var that = $(this)
+    var path = $(this).attr('href')
+    $.ajax({
+      url: path,
+      dataType: "html"
+    }).done(function(response){
+      that.before(response)
+    })
+  });
+
    $('.vote-answer-button').on("click", function(e){
      e.preventDefault()
        var id = $(this).closest("article").attr("id")

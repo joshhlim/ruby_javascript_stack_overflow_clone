@@ -81,7 +81,11 @@ end
 get '/questions/:id/answers/new' do
   if session[:id]
     @question = Question.find(params[:id])
-    erb :'answers/new'
+    if request.xhr?
+      erb :'answers/new', layout: false
+    else
+      erb :'answers/new'
+    end
   else
     redirect '/'
   end
@@ -100,7 +104,11 @@ end
 get '/questions/:id/comments/new' do
   if session[:id]
     @question = Question.find(params[:id])
-    erb :'questions/new_comment'
+    if request.xhr?
+      erb :'questions/new_comment', layout: false
+    else
+      erb :'questions/new_comment'
+    end
   else
     redirect '/'
   end
@@ -113,13 +121,18 @@ post '/questions/:id/comments' do
     commentable_type: 'Question',
     commentable_id: params[:id],
     user_id: session[:id])
-  redirect :"questions/#{params[:id]}"
+
+    redirect :"questions/#{params[:id]}"
 end
 
 get '/answers/:id/comments/new' do
   if session[:id]
     @answer = Answer.find(params[:id])
-    erb :'answers/new_comment'
+    if request.xhr?
+      erb :'answers/new_comment', layout: false
+    else
+      erb :'answers/new_comment'
+    end
   else
     redirect '/'
   end
