@@ -100,3 +100,21 @@ post '/answers/:id/comments' do
     user_id: session[:id])
   redirect :"questions/#{params[:id]}"
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

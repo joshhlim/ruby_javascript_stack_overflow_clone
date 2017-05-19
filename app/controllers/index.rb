@@ -15,3 +15,9 @@ get '/search' do
 
 
 end
+
+post '/search' do
+  @questions = Question.all
+  @questions.search_question(@query)
+  erb :'/results'
+end
