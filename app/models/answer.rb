@@ -13,11 +13,9 @@ class Answer < ApplicationRecord
     answers.each do |answer|
       answer.update_attributes(best_answer: 0)
     end
-    p answers
   end
 
   def best_answer?
     self.best_answer == 1
   end
-
 end
