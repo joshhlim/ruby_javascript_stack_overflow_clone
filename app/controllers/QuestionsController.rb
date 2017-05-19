@@ -18,7 +18,12 @@ post '/questions/:id/vote' do
  @category = @question.category
  @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
  @vote.save
- erb :'categories/show'
+  if request.xhr?
+    content_type :json
+    {id: @question.id, count: @question.votes.count}.to_json
+  else
+    erb :'categories/show'
+  end
 end
 
 # create

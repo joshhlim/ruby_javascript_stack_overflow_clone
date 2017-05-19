@@ -4,12 +4,12 @@
   <ul>
     <% @category.questions.each do |q| %>
      <li>
-      <article id = "<% q.id %>">
+      <article id = "<%= q.id %>">
       <h3><a href="/questions/<%= q.id %>"> <%= q.title %></a></h3>
       <form action = "/questions/<%=q.id %>/vote" method = "POST" class= "inline">
         <button class = "upvote-button" type="submit" name="Upvote!"></button>
       </form>
-       <span> <%= q.votes.count %> votes || </span>
+       <span class="count"> <%= q.votes.count %> votes || </span>
        <span> author: <%= q.user.username %> ||</span>
        <span> <%= q.comments.count %> comments || </span>
        <a class="delete" href='/questions/<%= q.id %>'>delete this question</a>
