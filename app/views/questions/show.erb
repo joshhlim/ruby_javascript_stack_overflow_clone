@@ -27,13 +27,7 @@
 
   <p><%= question.body %></p>
 
-<!--   <div class="flex-column">
-    <form class="answer-form flex-column" method="post" action="/questions/<%= question.id %>/answers">
-      <label for="body-textarea">Your Answer:</label>
-      <textarea class="body-textarea" name="answer[body]"></textarea>
-      <input type="submit" value="Respond">
-    </form>
-  </div> -->
+
 
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
