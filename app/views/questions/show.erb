@@ -53,6 +53,7 @@
   <ul class="question-answers">
     <% question.answers.each do |answer| %>
       <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+
         <ul id="answer-comment-ul">
           <% answer.comments.each do |comment| %>
             <li><%= comment.body %> - <%= (User.find(session[:id])).username %></li>

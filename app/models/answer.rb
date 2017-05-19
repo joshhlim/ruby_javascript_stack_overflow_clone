@@ -9,4 +9,8 @@ class Answer < ApplicationRecord
     votes.sum(:value)
   end
 
+  def best_answer?
+    self.best_answer == 1
+  end
+
 end
