@@ -8,31 +8,32 @@
   <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
     <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
  </form>
-   <span class="count"> <%= @question.votes.count %> votes || </span>
+ <span class="count"> <%= @question.votes.count %> votes || </span>
    <span> author: <%= @question.user.username %> ||</span>
    <span> <%= @question.comments.count %> comments || </span>
    <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
-       <input type="hidden" name="_method" value="DELETE" />
-       <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+     <input type="hidden" name="_method" value="DELETE" />
+     <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
    </form>
 </article>
-<h3><%= @question.comments.count %> Comments</h3>
+<h4><%= @question.comments.count %> Comments</h4>
 <ul>
   <% @question.comments.each do |comment| %>
-    <li><%= comment.body %><br><%= comment.user.username%></li>
+  <li><%= comment.body %><br><%= comment.user.username%></li>
   <% end %>
 </ul>
-<% if session[:id] %>
-  <a href='/questions/<%= @question.id %>/comments/new'>add a comment</a>
-<% end %>
-
+<div>
+  <% if session[:id] %>
+  <a href='/questions/<%= @question.id %>/comments/new' class='question_comment'>add a comment</a>
+  <% end %>
+</div>
 <h2><%= @question.answers.count %> Answers</h2>
 <% @question.answers.each do |answer| %>
   <div class='answer'
     <p><%= answer.body %></p>
     <p class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></p>
 
-    <h3><%= answer.comments.count %> Comments</h3>
+    <h4><%= answer.comments.count %> Comments</h4>
     <ul>
       <% answer.comments.each do |comment| %>
         <li><%= comment.body %><br><%= comment.user.username%></li>

@@ -19,4 +19,30 @@ $(document).ready(function() {
       })
    })
 
+  $('div').on('click', '.question_comment', function(e){
+    e.preventDefault()
+    var that = $(this)
+    var path = $(this).attr('href')
+    $.ajax({
+      url: path,
+      dataType: "html"
+    }).done(function(response){
+      that.before(response)
+    })
+  });
+
+  $('div').on('submit', '.submit_question_comment', function(e){
+    e.preventDefault()
+    var path = $(this).attr('action')
+    var data = $(this).serialize()
+    var that = $(this)
+    console.log("Path is " + path)
+    $.ajax({
+      method: "POST",
+      url: path,
+      data: data
+    }).done(function(response){
+      $(that).parent().hide()
+    })
+  });
 });
