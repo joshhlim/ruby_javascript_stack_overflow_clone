@@ -115,4 +115,9 @@ p {
 .left {
   left: 0; }
 
+div.answer-show {
+  display: inline-block;
+  float: left;
+}
+
 /*# sourceMappingURL=application.css.map */

@@ -31,18 +31,30 @@ end
 get '/questions/:id/answers/:answer_id/edit' do
   @question = Question.find(params[:id])
   @answer = Answer.find(params[:answer_id])
-  erb :'answers/edit'
+  if request.xhr?
+    erb :'answers/_edit', layout: false, locals: {question: @question, answer: @answer}
+  else
+    erb :'answers/edit'
+  end
 end
 
 put '/questions/:id/answers/:answer_id' do
   @question = Question.find(params[:id])
   @answer = Answer.find(params[:answer_id])
   @answer.update_attributes(params[:answer])
-  redirect "/questions/#{@question.id}/answers"
+  if request.xhr?
+    erb :'answers/_show', layout: false, locals: {question: @question, answer: @answer}
+  else
+    redirect "/questions/#{@question.id}/answers"
+  end
 end
 
 delete '/questions/:id/answers/:answer_id' do
   @answer = Answer.find(params[:answer_id])
   @answer.destroy
-  redirect "/questions/#{params[:id]}/answers"
+  if request.xhr?
+    "Answer will be deleted"
+  else
+    redirect "/questions/#{params[:id]}/answers"
+  end
 end
