@@ -1,7 +1,20 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+  $('.upvote-button').on("click", function(e){
+    e.preventDefault()
+      var id = $(this).closest("article").attr("id")
+      var route = $(this).parent().attr('action')
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+      var request = $.ajax({
+        method: "post",
+        url: route,
+        dataType: "json"
+
+      });
+      request.done(function(response){
+        $('#' + id).find(".upvote-button").css('color', 'red');
+        alert("You voted")
+        $('#' + id).find(".count").text(response.count)
+      })
+   })
+
 });

@@ -4,12 +4,12 @@
   <ul class= "catlist">
     <% @category.questions.each do |q| %>
      <li class= "cat">
-      <article id = "<% q.id %>">
+      <article id = "<%= q.id %>">
       <h3><a href="/questions/<%= q.id %>"> <%= q.title %></a></h3>
       <form action = "/questions/<%=q.id %>/vote" method = "POST" class= "inline">
         <button type="submit" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
       </form>
-       <span> <%= q.votes.count %> votes || </span>
+       <span class="count"> <%= q.votes.count %> votes || </span>
        <span> author: <%= q.user.username %> ||</span>
        <span> <%= q.comments.count %> comments || </span>
        <form action = "/questions/<%=q.id %>" method = "POST" class= "inline delete">
