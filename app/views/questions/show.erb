@@ -74,38 +74,8 @@
 
   <ul class="question-answers">
     <% question.answers.each do |answer| %>
-      <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
-      <% if answer.best_answer? then %><%= "THIS ANSWER IS AMAZING" %><% end %>
-      <% if question.questioner_id == session[:id] %>
-      <form action="/questions/<%= answer.question_id %>/answers/<%= answer.id %>/bestanswer" method="POST">
-        <input type="hidden" name="_method" value="PUT">
-        <input type="submit" value="Best Answer">
-      </form>
-      <% end %>
-        <ul id="answer-comment-ul">
-          <% answer.comments.each do |comment| %>
-            <% if logged_in? %>
-              <div>
-                <form class="ac-upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/vote'>
-                  <button type="submit" name="submit_param" value="submit_value"></button>
-                 </form>
-                  <div class="votes"><%= comment.points %></div>
-                <form class="ac-downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/downvote'>
-                  <button type="submit" name="submit_param" value="submit_value"></button>
-                </form>
-              </div>
-            <% end %>
-            <li><%= comment.body %> - <% if logged_in? then %> <%= "#{(User.find(session[:id])).username}" %><% end %></li>
-          <% end %>
-        </ul>
-      <div>
-        <a id="answer-comment-link" href="/questions/<%= question.id %>/answers/<%= answer.id %>/comments/new">Comment on this answer</a>
-        <form class="answer-comment-form" action="/questions/<%= question.id %>/answers/<%= answer.id %>/comments" method="POST">
-          <textarea rows="3" cols="40" name="body" placeholder="Enter comment..."></textarea>
-          <input type="submit">
-        </form>
-      </div>
+      <li class="question-answer"><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+      <!-- MOVED THE ANSWER COMMENTS IN A PARTIAL LINKED WITHIN THE ANSWER PARTIAL OR ELSE THE 'COMMENT ON THIS ANSWER' PERSISTS WHEN ANSWER IS DELETED -->
     <% end %>
   </ul>
 </div>
-
