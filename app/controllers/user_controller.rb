@@ -39,7 +39,8 @@ get '/users/:id' do
   @user = User.find(params[:id])
   @questions = @user.questions
   @answers  = @user.answers
-  # @comments = @user.comments
+  @question_comments = @user.comments.where(commentable_type: "Question")
+  @answer_comments = @user.comments.where(commentable_type: "Answer")
 
   erb :'users/profile'
 end
