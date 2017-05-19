@@ -4,8 +4,12 @@ get "/questions/:id/comments/new" do
 end
 
 post "/questions/:id/comments" do
-  Comment.create(body: params[:body], commentable_id: params[:id], commentable_type: "Question")
-  redirect "/questions/#{params[:id]}"
+  new_comment = Comment.create(body: params[:body], commentable_id: params[:id], commentable_type: "Question")
+  if request.xhr?
+    "<li>#{new_comment.body}</li>"
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
 
 get "/questions/:id/answers/:answer_id/comments/new" do
@@ -15,6 +19,10 @@ get "/questions/:id/answers/:answer_id/comments/new" do
 end
 
 post "/questions/:id/answers/:answer_id/comments" do
-  Comment.create(body: params[:body], commentable_id: params[:answer_id], commentable_type: "Answer")
-  redirect "/questions/#{params[:id]}"
+  new_comment = Comment.create(body: params[:body], commentable_id: params[:answer_id], commentable_type: "Answer")
+  if request.xhr?
+    "<li>#{new_comment.body}</li>"
+  else
+    redirect "/questions/#{params[:id]}"
+  end
 end
