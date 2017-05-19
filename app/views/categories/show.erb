@@ -7,11 +7,11 @@
       <article id = "<%= q.id %>">
       <h3><a href="/questions/<%= q.id %>"> <%= q.title %></a></h3>
       <form action = "/questions/<%=q.id %>/vote" method = "POST" class= "inline">
-        <button type="submit" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+        <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top icon"></span> </button>
       </form>
        <span class="count"> <%= q.votes.count %> votes || </span>
        <span> author: <%= q.user.username %> ||</span>
-       <span> <%= q.comments.count %> comments || </span>
+       <span> <%= q.comments.count %> comments </span>
        <form action = "/questions/<%=q.id %>" method = "POST" class= "inline delete">
            <input type="hidden" name="_method" value="DELETE" />
            <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
