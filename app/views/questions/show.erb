@@ -113,7 +113,9 @@
           <input type="submit">
         </form>
       </div>
+
+      <li class="question-answer"><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+      <!-- MOVED THE ANSWER COMMENTS IN A PARTIAL LINKED WITHIN THE ANSWER PARTIAL OR ELSE THE 'COMMENT ON THIS ANSWER' PERSISTS WHEN ANSWER IS DELETED -->
     <% end %>
   </ul>
 </div>
-
