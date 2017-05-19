@@ -5,6 +5,7 @@
 </div>
 
 <article id = "<%= @question.id %>">
+
   <% @voted_question = Vote.find_by(voteable_type: "Question", voteable_id: @question.id, user_id: session[:id]) %>
   <% if @voted_question %>
      <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
@@ -14,7 +15,9 @@
    </form>
   <% end %>
    <span class="count"> <%= @question.votes.count %> votes || </span>
+
    <span> author: <%= @question.user.username %> ||</span>
+
    <span> <%= @question.comments.count %> comments </span>
    <% if @question.user.id == session[:id] %>
      <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
@@ -22,17 +25,19 @@
         <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
     </form>
    <% end %>
+
 </article>
-<h3><%= @question.comments.count %> Comments</h3>
-<ul>
+<h4><%= @question.comments.count %> Comments</h4>
+<ul class='q_comments'>
   <% @question.comments.each do |comment| %>
-    <li><%= comment.body %><br><%= comment.user.username%></li>
+  <li><%= comment.body %><br><%= comment.user.username%></li>
   <% end %>
 </ul>
-<% if session[:id] %>
-  <a href='/questions/<%= @question.id %>/comments/new'>add a comment</a>
-<% end %>
-
+<div>
+  <% if session[:id] %>
+  <a href='/questions/<%= @question.id %>/comments/new' class='question_comment'>add a comment</a>
+  <% end %>
+</div>
 <h2><%= @question.answers.count %> Answers</h2>
 <% @question.answers.each do |answer| %>
   <article id="answer<%= answer.id %>" class='answer'>
@@ -48,17 +53,22 @@
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
 
-    <h3><%= answer.comments.count %> Comments</h3>
+    <h4><%= answer.comments.count %> Comments</h4>
     <ul>
       <% answer.comments.each do |comment| %>
         <li><%= comment.body %><br><%= comment.user.username%></li>
       <% end %>
     </ul>
   </article>
-  <% if session[:id] %>
-    <a href='/answers/<%= answer.id %>/comments/new'>add a comment</a>
+  <div>
+    <% if session[:id] %>
+      <a href='/answers/<%= answer.id %>/comments/new' class='answer_comment'>add a comment</a>
+    <% end %>
+  </div>
+<% end %>
+
+<div>
+  <% if session[:id] && session[:id] != @question.user_id %>
+    <h3><a href='/questions/<%= @question.id.to_s %>/answers/new' class='answer_question'>Post Your Answer</a></h3>
   <% end %>
-<% end %>
-<% if session[:id] %>
-  <h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
-<% end %>
+</div>
