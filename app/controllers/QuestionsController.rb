@@ -63,7 +63,11 @@ end
 get '/questions/:id/answers/new' do
   if session[:id]
     @question = Question.find(params[:id])
-    erb :'answers/new'
+    if request.xhr?
+      erb :'answers/new', layout: false
+    else
+      erb :'answers/new'
+    end
   else
     redirect '/'
   end

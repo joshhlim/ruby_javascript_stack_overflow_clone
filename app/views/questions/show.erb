@@ -46,6 +46,9 @@
     <% end %>
   </div>
 <% end %>
-<% if session[:id] %>
-  <h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
-<% end %>
+
+<div>
+  <% if session[:id] && session[:id] !=  @question.id %>
+    <h3><a href='/questions/<%= @question.id.to_s %>/answers/new' class='answer_question'>Post Your Answer</a></h3>
+  <% end %>
+</div>

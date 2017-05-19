@@ -43,6 +43,18 @@ $(document).ready(function() {
     })
   });
 
+  $('div').on('click', '.answer_question', function(e){
+    e.preventDefault()
+    var that = $(this)
+    var path = $(this).attr('href')
+    $.ajax({
+      url: path,
+      dataType: "html"
+    }).done(function(response){
+      that.before(response)
+    })
+  });
+
   // $('div').on('submit', '.submit_question_comment', function(e){
   //   e.preventDefault()
   //   var path = $(this).attr('action')
