@@ -25,7 +25,9 @@
         <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
     </form>
    <% end %>
-
+  <% if @question.user.id == session[:id] %>
+    <div><a href="/questions/<%= @question.id %>/edit">Update Question</a></div>
+  <% end %>
 </article>
 <h4 class='question_comments_count'><%= @question.comments.count %> Comments</h4>
 <ul class='q_comments'>
@@ -83,6 +85,9 @@
     <% end %>
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
+    <% if session[:id] %>
+  <div><a href="/question/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>
+<% end %>
 
     <h4 class='answer_comments_count'><%= answer.comments.count %> Comments</h4>
     <ul class='a_comments'>
