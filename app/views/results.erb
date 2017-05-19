@@ -6,11 +6,12 @@
       <th>Question</th>
       <th>Date</th>
     </tr>
-    <% all_questions.each do |question| %>
+    <% @all_questions.each do |question| %>
     <tr>
       <td><%= question.category.name %></td>
       <td><a href="/questions/<%= question.id %>"><%= question.title %></a></td>
-      # need to keep working from here using the table in the profile.erb
+      <td><%= question.created_at %></td>
     </tr>
+    <% end %>
   </table>
 </div>
