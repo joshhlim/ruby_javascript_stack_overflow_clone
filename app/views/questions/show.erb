@@ -11,24 +11,27 @@
   <% end %>
   <p><%= question.body %></p>
 
-  <h2>Answers</h2>
-
-  <div class="flex-column">
+<!--   <div class="flex-column">
     <form class="answer-form flex-column" method="post" action="/questions/<%= question.id %>/answers">
       <label for="body-textarea">Your Answer:</label>
       <textarea class="body-textarea" name="answer[body]"></textarea>
       <input type="submit" value="Respond">
     </form>
-  </div>
+  </div> -->
 
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
       <li><%= comment.body %></li>
     <% end %>
   </ul>
-  <a href="/questions/<%= question.id %>/answers/new">Answer this question</a>
-  <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
+    <form class="question-page-answer-form" action="/questions/<%= question.id %>/answers" method="post">
+      <button type="submit">Answer this question</button>
+    </form>
+    <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
   </br></br>
+
+  <h2>Answers</h2>
+
   <ul>
     <% question.answers.each do |answer| %>
       <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
