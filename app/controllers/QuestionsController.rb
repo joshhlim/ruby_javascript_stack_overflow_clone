@@ -14,16 +14,20 @@ get '/questions/new' do
 end
 
 post '/questions/:id/vote' do
- @question = Question.find_by(id: params[:id])
- @category = @question.category
- @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
- @vote.save
-  if request.xhr?
-    content_type :json
-    {id: @question.id, count: @question.votes.count}.to_json
-  else
-    erb :'categories/show'
-  end
+ # Tried to implement logic to only allow a user to vote once - not working yet
+ # @repeater = Vote.find_by(user_id: session[:id]).voteable_id
+ # if @repeater.include?(params[:id])
+  @question = Question.find_by(id: params[:id])
+  @category = @question.category
+  @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
+  @vote.save
+   if request.xhr?
+     content_type :json
+     {id: @question.id, count: @question.votes.count}.to_json
+   else
+     erb :'categories/show'
+   end
+ # end
 end
 
 # create
