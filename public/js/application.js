@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.upvote-button').on("click", function(e){
+  $('.vote-button').on("click", function(e){
     e.preventDefault()
       var id = $(this).closest("article").attr("id")
       var route = $(this).parent().attr('action')
@@ -11,7 +11,9 @@ $(document).ready(function() {
 
       });
       request.done(function(response){
-        $('#' + id).find(".upvote-button").css('color', 'red');
+        console.log(typeof $('#' + id).find(".vote-button"))
+        $('#' + id).find(".vote-button").removeClass("btn-success btn-xs");
+        $('#' + id).find(".vote-button").addClass("btn-danger btn-xs");
         alert("You voted")
         $('#' + id).find(".count").text(response.count)
       })

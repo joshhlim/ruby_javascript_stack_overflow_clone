@@ -6,14 +6,14 @@
 
 <article id = "<%= @question.id %>">
   <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
-    <button type="submit" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+    <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
  </form>
    <span class="count"> <%= @question.votes.count %> votes || </span>
    <span> author: <%= @question.user.username %> ||</span>
    <span> <%= @question.comments.count %> comments || </span>
    <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
        <input type="hidden" name="_method" value="DELETE" />
-       <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+       <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
    </form>
 </article>
 <h3><%= @question.comments.count %> Comments</h3>
