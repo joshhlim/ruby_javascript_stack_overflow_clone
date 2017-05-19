@@ -1,11 +1,13 @@
 <% if logged_in? %>
-  <form id="upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/vote'>
+  <div>
+  <form class="a-upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/vote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
     <div class="votes"><%= answer.points %></div>
-  <form id="downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/downvote'>
+  <form class="a-downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/downvote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
+  </div>
 <% end %>
 
 <div>

@@ -1,11 +1,13 @@
 <% if logged_in? %>
-  <form id="upvote" method="post" action='/questions/<%= question.id %>/vote'>
+<div>
+  <form class="q-upvote" method="post" action='/questions/<%= question.id %>/vote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
     <div class="votes"><%= question.points %></div>
-  <form id="downvote" method="post" action='/questions/<%= question.id %>/downvote'>
+  <form class="q-downvote" method="post" action='/questions/<%= question.id %>/downvote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
+</div>
 <% end %>
 
 <div class="sub-container">
@@ -26,13 +28,15 @@
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
       <% if logged_in? %>
-        <form id="upvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/vote'>
+        <div>
+        <form class="qc-upvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/vote'>
           <button type="submit" name="submit_param" value="submit_value"></button>
         </form>
           <div class="votes"><%= comment.points %></div>
-        <form id="downvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/downvote'>
+        <form class="qc-downvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/downvote'>
           <button type="submit" name="submit_param" value="submit_value"></button>
         </form>
+        </div>
       <% end %>
       <li><%= comment.body %></li>
     <% end %>
@@ -64,13 +68,15 @@
         <ul id="answer-comment-ul">
           <% answer.comments.each do |comment| %>
             <% if logged_in? %>
-                <form id="upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/vote'>
+              <div>
+                <form class="ac-upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/vote'>
                   <button type="submit" name="submit_param" value="submit_value"></button>
                  </form>
                   <div class="votes"><%= comment.points %></div>
-                <form id="downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/downvote'>
+                <form class="ac-downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/downvote'>
                   <button type="submit" name="submit_param" value="submit_value"></button>
                 </form>
+              </div>
             <% end %>
             <li><%= comment.body %> - <%= (User.find(session[:id])).username %></li>
           <% end %>
