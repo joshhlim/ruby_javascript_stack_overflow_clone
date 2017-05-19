@@ -1,7 +1,7 @@
 <div class='container'>
-   <form action="/questions/<%= @question.id.to_s%>/comments" method="POST" class='submit_question_comment'>
-     <label for="comment"> Comment: </label>
-     <textarea cols='60' rows='4' name="[comment]body" id='body'></textarea>
-     <input type="submit" value="Submit Comment">
-  </form>
+   <form action="/questions/<%= @question.id.to_s%>/comments" method="POST">
+	     <label for="comment"> Comment: </label>
+	     <textarea cols='60' rows='10' name="[comment]body" id='body'></textarea>
+	     <input type="submit" value="Submit Comment">
+  	</form>
 </div>

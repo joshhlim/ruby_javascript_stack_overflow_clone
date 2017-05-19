@@ -4,7 +4,7 @@
   <p class='question-body'><%= @question.body %></p>
 </div>
 
-<article id = "<%= @question.id %>">
+<article id = "<%= @question.id %>" class='question_votes'>
 
   <% @voted_question = Vote.find_by(voteable_type: "Question", voteable_id: @question.id, user_id: session[:id]) %>
   <% if @voted_question %>
@@ -25,12 +25,14 @@
         <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
     </form>
    <% end %>
-
+  <% if @question.user.id == session[:id] %>
+    <div><a href="/questions/<%= @question.id %>/edit">Update Question</a></div>
+  <% end %>
 </article>
-<h4><%= @question.comments.count %> Comments</h4>
+<h4 class='question_comments_count'><%= @question.comments.count %> Comments</h4>
 <ul class='q_comments'>
   <% @question.comments.each do |comment| %>
-  <li><%= comment.body %><br><%= comment.user.username%></li>
+  <li><%= comment.body %>  - <%= comment.user.username%></li>
   <% end %>
 </ul>
 <div>
@@ -72,8 +74,9 @@
    <% end %>
  </div>
  <% else %>
+
   <article id="answer<%= answer.id %>" class='answer'>
-    <span><%= answer.body %></span> </br>
+    <span class='answer_content'><br><%= answer.body %><br></span> </br>
     <% @voted_answer = Vote.find_by(voteable_type: "Answer", voteable_id: answer.id, user_id: session[:id]) %>
     <% if @voted_answer %>
       <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
@@ -84,11 +87,14 @@
     <% end %>
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
+    <% if session[:id] %>
+  <div><a href="/question/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>
+<% end %>
 
-    <h4><%= answer.comments.count %> Comments</h4>
-    <ul>
+    <h4 class='answer_comments_count'><%= answer.comments.count %> Comments</h4>
+    <ul class='a_comments'>
       <% answer.comments.each do |comment| %>
-        <li><%= comment.body %><br><%= comment.user.username%></li>
+        <li><%= comment.body %>  - <%= comment.user.username%></li>
       <% end %>
     </ul>
   </article>
