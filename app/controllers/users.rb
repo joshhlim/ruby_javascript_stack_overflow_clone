@@ -49,3 +49,7 @@ post '/users' do
     erb :'users/new'
   end
 end
+
+delete '/users' do
+
+end
