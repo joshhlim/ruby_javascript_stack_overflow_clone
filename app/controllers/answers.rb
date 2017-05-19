@@ -14,7 +14,11 @@ post '/questions/:id/answers' do
   @answer = Answer.new(params[:answer])
   @answer.assign_attributes(question_id: @question.id, answerer_id: session[:id])
   @answer.save
-  redirect "/questions/#{@question.id}/answers"
+  if request.xhr?
+    erb :'/answers/_show', layout: false, locals: { question: @question, answer: @answer }
+  else
+    redirect "/questions/#{@question.id}/answers"
+  end
 end
 
 # don't need to show indiv answer unless editing

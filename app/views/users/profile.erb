@@ -5,7 +5,7 @@
 
   <% if user.questions %>
     <% user.questions.each do |question| %>
-      <p><a class="question-link" href="/questions/#{question.id}"><%= question.title %></a></p>
+      <p><a class="question-link" href="/questions/<%= question.id %>"><%= question.title %></a></p>
     <% end %>
   <% end %>
 
