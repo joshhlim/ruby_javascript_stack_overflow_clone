@@ -1,17 +1,34 @@
 $(document).ready(function() {
 
+
+// questions/show (submit an answer form)
+// ~ default answer-form to hidden
+  $(".question-page-answer-form").hide()
+// ~ show answer form on button click
+  $("#question-page-answer-button").click(function() {
+    $(".question-page-answer-form").show()
+    $(this).hide()
+  });
+// ~ post answer to database & add to page on form submit
   $(".question-page-answer-form").submit(function(e) {
     e.preventDefault();
-    var id =
-    $.ajax() {
-      method: "POST"
-      url: "/questions/" + id + "/answers"
-    }
-    .done() {
-
-    }
-
+    var link = $(this).attr("action");
+    var data = $(this).serialize();
+    var $that = $(this)
+    $.ajax({
+      method: "POST",
+      url: link,
+      data: data,
+      dataType: "html"
     })
+    .done(function(response){
+      // ~ add new answer to page
+      $(".question-answers").append(response);
+      // ~ rehide form, reshow answer button
+      $("#question-page-answer-button").show();
+      $(".question-page-answer-form").hide()
+    })
+  });
 
 
 
@@ -21,7 +38,7 @@ $(document).ready(function() {
   $("#question-comment-link").click(function(e) {
     e.preventDefault();
     $("#question-comment-form").show();
-  })
+  });
 
 
 
@@ -60,5 +77,4 @@ $(document).ready(function() {
       $(".answer-comment-form").hide();
     })
   })
->>>>>>> master-paul-handlers
 });

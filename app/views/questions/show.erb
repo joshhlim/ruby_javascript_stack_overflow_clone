@@ -1,3 +1,6 @@
+
+<!-- Vote Button -->
+<!-- =================================== -->
 <% if logged_in? %>
   <form id="upvote" method="post" action='/questions/<%= question.id %>/vote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
@@ -37,8 +40,11 @@
       <li><%= comment.body %></li>
     <% end %>
   </ul>
+    <button id="question-page-answer-button" type="submit">Answer this question</button>
     <form class="question-page-answer-form" action="/questions/<%= question.id %>/answers" method="post">
-      <button type="submit">Answer this question</button>
+      <label for="body-textarea">Reply:</label>
+      <textarea id="body-textarea" name="answer[body]"></textarea>
+      <input type="submit" value="Respond">
     </form>
     <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
   </br></br>
