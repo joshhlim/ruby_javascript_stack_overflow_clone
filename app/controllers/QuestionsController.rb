@@ -13,17 +13,35 @@ get '/questions/new' do
   end
 end
 
+post '/questions/:question_id/answer/:id/vote' do
+  @question = Question.find_by(id: params[:question_id])
+  @category = @question.category
+  @answer = Answer.find_by(id: params[:id], question_id: params[:question_id])
+  @vote = Vote.new(voteable_type: Answer, voteable_id: params[:id])
+  @vote.save
+   if request.xhr?
+     content_type :json
+     {id: @answer.id, count: @answer.votes.count}.to_json
+   else
+     erb :'categories/show'
+   end
+end
+
 post '/questions/:id/vote' do
- @question = Question.find_by(id: params[:id])
- @category = @question.category
- @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
- @vote.save
-  if request.xhr?
-    content_type :json
-    {id: @question.id, count: @question.votes.count}.to_json
-  else
-    erb :'categories/show'
-  end
+ # Tried to implement logic to only allow a user to vote once - not working yet
+ # @repeater = Vote.find_by(user_id: session[:id]).voteable_id
+ # if @repeater.include?(params[:id])
+  @question = Question.find_by(id: params[:id])
+  @category = @question.category
+  @vote = Vote.new(voteable_type: Question, voteable_id: params[:id])
+  @vote.save
+   if request.xhr?
+     content_type :json
+     {id: @question.id, count: @question.votes.count}.to_json
+   else
+     erb :'categories/show'
+   end
+ # end
 end
 
 # create
@@ -129,3 +147,21 @@ post '/answers/:id/comments' do
     user_id: session[:id])
   redirect :"questions/#{answer.question.id}"
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

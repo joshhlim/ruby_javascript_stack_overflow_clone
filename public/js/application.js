@@ -15,7 +15,7 @@ $(document).ready(function() {
         $('#' + id).find(".vote-button").removeClass("btn-success btn-xs");
         $('#' + id).find(".vote-button").addClass("btn-danger btn-xs");
         alert("You voted")
-        $('#' + id).find(".count").text(response.count)
+        $('#' + id).find(".count").text(response.count + "votes ||")
       })
    })
 
@@ -55,20 +55,23 @@ $(document).ready(function() {
     })
   });
 
-  // $('div').on('submit', '.submit_question_comment', function(e){
-  //   e.preventDefault()
-  //   var path = $(this).attr('action')
-  //   var data = $(this).serialize()
-  //   var that = $(this)
-  //   console.log("Path is " + path)
-  //   $.ajax({
-  //     method: "post",
-  //     url: path,
-  //     data: data
-  //   }).done(function(response){
-  //     console.log("Response is " + response)
-  //     $(that).parent().hide()
-  //     $('.q-comments').child().append(response)
-  //   })
-  // });
+   $('.vote-answer-button').on("click", function(e){
+     e.preventDefault()
+       var id = $(this).closest("article").attr("id")
+       var route = $(this).parent().attr('action')
+
+       var request = $.ajax({
+         method: "post",
+         url: route,
+         dataType: "json"
+
+       });
+       request.done(function(response){
+         console.log($('#' + id).find(".count-answer"))
+         $('#' + id).find(".vote-answer-button").removeClass("btn-success btn-xs");
+         $('#' + id).find(".vote-answer-button").addClass("btn-danger btn-xs");
+         alert("You voted")
+         $('#' + id).find(".count-answer").text(response.count + "votes ||")
+       })
+    })
 });
