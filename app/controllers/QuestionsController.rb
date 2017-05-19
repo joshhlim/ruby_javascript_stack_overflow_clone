@@ -70,11 +70,11 @@ put '/questions/:id' do
 
 end
 
-# delete
 delete '/questions/:id' do
-   question = Question.find_by(id: params[:id])
-   question.destroy
-   redirect '/'
+   @question = Question.find_by(id: params[:id])
+   @user = @question.user.id
+   @question.destroy
+   redirect to "/users/#{@user}"
 end
 
 # new answer

@@ -22,7 +22,7 @@
    <% if @question.user.id == session[:id] %>
      <form action = "/questions/<%=@question.id %>" method = "POST" class= "inline delete">
         <input type="hidden" name="_method" value="DELETE" />
-        <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
+        <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
     </form>
    <% end %>
 

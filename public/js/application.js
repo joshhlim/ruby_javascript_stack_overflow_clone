@@ -74,4 +74,23 @@ $(document).ready(function() {
          $('#' + id).find(".count-answer").text(response.count + " votes ||")
        })
     })
+
+
+   $('.delete-button').on("click", function(e){
+    e.preventDefault()
+      var id = $(this).closest("article").attr("id")
+      var route = $(this).closest("form").attr('action')
+
+      var request = $.ajax({
+        method: "delete",
+        url: route,
+        dataType: "json"
+
+      });
+      request.done(function(response){
+        $('#'+ id).remove()
+        alert("You deleted")
+      })
+   })
+
 });

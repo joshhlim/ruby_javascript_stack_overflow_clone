@@ -17,7 +17,7 @@
 
 			<% @questions.each do |question| %>
 			<tr>
-				<td><%= question.category.name %></td>
+				<td><a href='/category/<%= question.category.id %>'><%= question.category.name %></a></td>
 				<td><a href='/questions/<%= question.id %>'><%= question.title %></a></td>
 				<td><%= question.created_at %></td>
 			</tr>
