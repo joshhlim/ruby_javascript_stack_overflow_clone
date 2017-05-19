@@ -75,7 +75,13 @@
   <ul class="question-answers">
     <% question.answers.each do |answer| %>
       <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
-
+      <% if answer.best_answer? then %><%= "THIS ANSWER IS AMAZING" %><% end %>
+      <% if question.questioner_id == session[:id] %>
+      <form action="/questions/<%= answer.question_id %>/answers/<%= answer.id %>/bestanswer" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="submit" value="Best Answer">
+      </form>
+      <% end %>
         <ul id="answer-comment-ul">
           <% answer.comments.each do |comment| %>
             <% if logged_in? %>

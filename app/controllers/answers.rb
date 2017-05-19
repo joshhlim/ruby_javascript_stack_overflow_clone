@@ -28,6 +28,13 @@ end
 #   erb :'answers/show'
 # end
 
+put '/questions/:id/answers/:answer_id/bestanswer' do
+  answers = Question.find(params[:id]).answers.all
+  Answer.reset_best_answer(answers)
+  Answer.find(params[:answer_id]).update_attributes(best_answer: 1)
+  redirect "/questions/#{params[:id]}"
+end
+
 get '/questions/:id/answers/:answer_id/edit' do
   @question = Question.find(params[:id])
   @answer = Answer.find(params[:answer_id])
