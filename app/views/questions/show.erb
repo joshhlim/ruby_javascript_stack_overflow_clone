@@ -17,6 +17,9 @@
         <button type="submit" class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
     </form>
    <% end %>
+  <% if @question.user.id == session[:id] %>
+    <div><a href="/questions/<%= @question.id %>/edit">Update Question</a></div>
+  <% end %>
 </article>
 <h3><%= @question.comments.count %> Comments</h3>
 <ul>
@@ -51,7 +54,4 @@
 <% end %>
 <% if session[:id] %>
   <h3><a href='/questions/<%= @question.id.to_s %>/answers/new'>Post Your Answer</a></h3>
-<% end %>
-<% if @question.user.id == session[:id] %>
-<div><a href="/questions/<%= @question.id %>/edit">Update Question</a></div>
 <% end %>

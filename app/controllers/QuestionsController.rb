@@ -141,7 +141,10 @@ post '/answers/:id/comments' do
   redirect :"questions/#{answer.question.id}"
 end
 
-
+get '/answers/:id/edit' do 
+  @answer = Answer.find(params[:id])
+  erb :'answers/update_answer'
+end
 
 
 
