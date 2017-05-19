@@ -1,14 +1,15 @@
 <% if logged_in? %>
-  <form id="upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/vote'>
+  <div>
+  <form class="a-upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/vote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
-
-  <form id="downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/downvote'>
+    <div class="votes"><%= answer.points %></div>
+  <form class="a-downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/downvote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
+  </div>
 <% end %>
-  <div class="votes"><%= answer.points %></div>
-  <div>votes</div>
+
 <div>
   <h3><%= answer.body %></h3>
     <span><%= "Answered by #{answer.answerer.username} on #{long_form_date(answer.created_at)}" %></span>

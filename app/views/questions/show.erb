@@ -2,16 +2,17 @@
 <!-- Vote Button -->
 <!-- =================================== -->
 <% if logged_in? %>
-  <form id="upvote" method="post" action='/questions/<%= question.id %>/vote'>
+<div>
+  <form class="q-upvote" method="post" action='/questions/<%= question.id %>/vote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
-
-  <form id="downvote" method="post" action='/questions/<%= question.id %>/downvote'>
+    <div class="votes"><%= question.points %></div>
+  <form class="q-downvote" method="post" action='/questions/<%= question.id %>/downvote'>
     <button type="submit" name="submit_param" value="submit_value"></button>
   </form>
+</div>
 <% end %>
-  <div class="votes"><%= question.points %></div>
-  <div>votes</div>
+
 <div class="sub-container">
   <h1><%= question.title %></h1>
 
@@ -27,27 +28,41 @@
 
   <p><%= question.body %></p>
 
+  <ul id="question-comment-ul">
+    <% question.comments.each do |comment| %>
+      <% if logged_in? %>
+        <div>
+        <form class="qc-upvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/vote'>
+          <button type="submit" name="submit_param" value="submit_value"></button>
+        </form>
+          <div class="votes"><%= comment.points %></div>
+        <form class="qc-downvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/downvote'>
+          <button type="submit" name="submit_param" value="submit_value"></button>
+        </form>
+        </div>
+      <% end %>
+      <li><%= comment.body %></li>
+    <% end %>
+  </ul>
 
+  <h2>Answers</h2>
 
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
       <li><%= comment.body %></li>
     <% end %>
   </ul>
+
+    <!-- Shouldn't see this button if not logged  -->
     <button id="question-page-answer-button" type="submit">Answer this question</button>
     <form class="question-page-answer-form" action="/questions/<%= question.id %>/answers" method="post">
       <label for="body-textarea">Reply:</label>
       <textarea id="body-textarea" name="answer[body]"></textarea>
       <input type="submit" value="Respond">
     </form>
-    <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
+
   </br></br>
 
-  <h2>Answers</h2>
-
-  <ul>
-
-  <a href="/questions/<%= question.id %>/answers/new">Answer this question</a>
   <a id="question-comment-link" href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
 
   <form id="question-comment-form" action="/questions/<%= question.id %>/comments" method="POST">
@@ -60,9 +75,27 @@
   <ul class="question-answers">
     <% question.answers.each do |answer| %>
       <li><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
+      <% if answer.best_answer? then %><%= "THIS ANSWER IS AMAZING" %><% end %>
+      <% if question.questioner_id == session[:id] %>
+      <form action="/questions/<%= answer.question_id %>/answers/<%= answer.id %>/bestanswer" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="submit" value="Best Answer">
+      </form>
+      <% end %>
         <ul id="answer-comment-ul">
           <% answer.comments.each do |comment| %>
-            <li><%= comment.body %> - <%= (User.find(session[:id])).username %></li>
+            <% if logged_in? %>
+              <div>
+                <form class="ac-upvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/vote'>
+                  <button type="submit" name="submit_param" value="submit_value"></button>
+                 </form>
+                  <div class="votes"><%= comment.points %></div>
+                <form class="ac-downvote" method="post" action='/questions/<%= answer.question_id %>/answers/<%= answer.id %>/comments/<%= comment.id %>/downvote'>
+                  <button type="submit" name="submit_param" value="submit_value"></button>
+                </form>
+              </div>
+            <% end %>
+            <li><%= comment.body %> - <% if logged_in? then %> <%= "#{(User.find(session[:id])).username}" %><% end %></li>
           <% end %>
         </ul>
       <div>
