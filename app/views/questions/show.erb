@@ -47,34 +47,22 @@
 
   <h2>Answers</h2>
 
-
-  <div class="flex-column">
-    <form class="answer-form flex-column" method="post" action="/questions/<%= question.id %>/answers">
-      <label for="body-textarea">Your Answer:</label>
-      <textarea class="body-textarea" name="answer[body]"></textarea>
-      <input type="submit" value="Respond">
-    </form>
-  </div>
-
   <ul id="question-comment-ul">
     <% question.comments.each do |comment| %>
       <li><%= comment.body %></li>
     <% end %>
   </ul>
+
+    <!-- Shouldn't see this button if not logged  -->
     <button id="question-page-answer-button" type="submit">Answer this question</button>
     <form class="question-page-answer-form" action="/questions/<%= question.id %>/answers" method="post">
       <label for="body-textarea">Reply:</label>
       <textarea id="body-textarea" name="answer[body]"></textarea>
       <input type="submit" value="Respond">
     </form>
-    <a href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
+
   </br></br>
 
-  <h2>Answers</h2>
-
-  <ul>
-
-  <a href="/questions/<%= question.id %>/answers/new">Answer this question</a>
   <a id="question-comment-link" href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
 
   <form id="question-comment-form" action="/questions/<%= question.id %>/comments" method="POST">
@@ -101,7 +89,7 @@
                 </form>
               </div>
             <% end %>
-            <li><%= comment.body %> - <%= (User.find(session[:id])).username %></li>
+            <li><%= comment.body %> - <% if logged_in? then %> <%= "#{(User.find(session[:id])).username}" %><% end %></li>
           <% end %>
         </ul>
       <div>
