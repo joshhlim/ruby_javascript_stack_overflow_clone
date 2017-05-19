@@ -1,3 +1,4 @@
+
 <div class="question-title">
   <h1 class="question"><%= @question.title %></h1>
 </div>
@@ -17,9 +18,19 @@
   <p class="question-text"><%= @question.question %></p>
   <p class="question-timestamps">edited <%= Question.time_format(@question.updated_at) %></p>
   <a href="/questions/<%= @question.id %>/edit">edit</a>
+  <div>
+  <% if flash[:error] %>
+  <%= flash[:error] %>
+  <%end%>
+  </div>
   <form method="post" action="/questions/<%= @question.id%>">
   <input name="_method" type="hidden" value="delete">
   <input type="submit" value="delete">
+  <div>
+  <% if flash[:error] %>
+  <%= flash[:error] %>
+  <%end%>
+  </div>
   </form>
 </div>
 <h2>question comments</h2>

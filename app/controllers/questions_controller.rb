@@ -1,3 +1,4 @@
+require 'sinatra/flash'
 before do
   if logged_in?
     @user = User.find(session[:id])
@@ -17,7 +18,12 @@ end
 
 get '/questions/:id/edit' do
   @question = Question.find(params[:id])
+  if logged_in? && (@question.user_id == @user.id)
   erb:"/questions/edit"
+  else
+    flash[:error] = "You don't have rights to edit."
+    redirect "/questions/#{@question.id}"
+  end
 end
 
 post '/questions' do
@@ -38,11 +44,11 @@ end
 
 delete '/questions/:id' do
   @question = Question.find(params[:id])
-  if @user.id == @question.user_id
+  if logged_in? && (@question.user_id == @user.id)
     @question.destroy
     redirect "/"
   else
-    "Error. You do not have permission" #403 status?
+  flash[:error] = "You don't have rights to delete."
+  redirect "/questions/#{@question.id}"
   end
 end
-
