@@ -1,3 +1,14 @@
+<% if logged_in? %>
+  <form id="upvote" method="post" action='/questions/<%= question.id %>/vote'>
+    <button type="submit" name="submit_param" value="submit_value"></button>
+  </form>
+
+  <form id="downvote" method="post" action='/questions/<%= question.id %>/downvote'>
+    <button type="submit" name="submit_param" value="submit_value"></button>
+  </form>
+<% end %>
+  <div class="votes"><%= question.points %></div>
+  <div>votes</div>
 <div class="sub-container">
   <h1><%= question.title %></h1>
   <% if session[:id] == question.questioner_id %>

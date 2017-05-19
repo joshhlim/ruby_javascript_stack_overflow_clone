@@ -1,6 +1,8 @@
 <div class="sub-container">
   <ul>
     <% questions.each do |question| %>
+      <div class="votes"><%= question.points %></div>
+      <div>votes</div>
       <li id="home-questions-li"><a href=questions/<%=question.id%>><%= question.title %></a></li>
     <% end %>
   </ul>
