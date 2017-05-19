@@ -56,7 +56,9 @@ end
 
 # show
 get '/questions/:id' do
+  # puts params
   @question = Question.find(params[:id])
+  # @answer = Answer.find_by(user_id: session[:id])
   erb :'questions/show'
 end
 
@@ -141,12 +143,17 @@ post '/answers/:id/comments' do
   redirect :"questions/#{answer.question.id}"
 end
 
-get '/answers/:id/edit' do 
+get '/questions/:question_id/answers/:id/edit' do 
   @answer = Answer.find(params[:id])
   erb :'answers/update_answer'
 end
 
-
+put '/questions/:question_id/answers/:id' do 
+  @answer = Answer.find(params[:id])
+  @answer.update_attributes(params[:answer])
+  @answer.save
+  redirect "/questions/#{@question.id}"
+end   
 
 
 

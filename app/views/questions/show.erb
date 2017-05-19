@@ -40,6 +40,9 @@
     </form>
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
+    <% if session[:id] %>
+  <div><a href="/question/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>
+<% end %>
 
     <h3><%= answer.comments.count %> Comments</h3>
     <ul>
