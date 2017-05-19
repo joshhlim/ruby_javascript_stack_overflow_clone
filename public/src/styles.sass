@@ -2,14 +2,21 @@
 @import 'reset'
 $primary-font: 'Roboto', sans-serif
 $primary-color: darkgrey
+$orange: #f4b541
+$dark-orange: #f4aa42
 
 // *
 //   border: dashed 1px red
+
+// ========== II. General Tags ==========
 body
   font-family: $primary-font
+p
+  font-size: 1.1em
+  letter-spacing: 0.02em
+  line-height: 1.4em
 
-
-// ========== II. Styling Classes ==========
+// ========== III. Styling Classes ==========
 .flex-row
   display: flex
   align-items: center
@@ -24,7 +31,7 @@ body
 .font-md
   font-size: 2em
 
-// ========== III. Structural Classes ==========
+// ========== IV. Structural Classes ==========
 // ========== a. Navbar ==========
 .main-nav
   height: 70px
@@ -45,17 +52,59 @@ body
   height: 100%
   padding: 0 20px
   transition: background .1s linear
+.question-button
+  background-color: $orange
+  border: solid dimgrey 2px
+  box-shadow: 0 2px 2px 0 darkgrey
+  border-radius: 15px
+  margin-right: 20px
+  padding: 5px
+  transition: background .1s linear
+.question-button:hover
+  background-color: $dark-orange
+
 
 // ========== b. Main Content ==========
+// a. Universal
 .main-container
   width: 100%
 .sub-container
-  max-width: 960px
+  max-width: 900px
   width: 80%
-  margin: 5% 0
+  margin: 20px 0
+
+// b. Questions - Index
+.question-data-stats
+  background-color: whitesmoke
+  display: inline-block
+  padding: 5px
+  box-sizing: border-box
+  text-align: center
+.home-questions-li
+  align-items: center
+  border-top: solid 1px silver
+  display: flex
+  padding: 10px 0
+.home-questions-right
+  margin-left: 15px
+.question-link
+  color: steelblue
+.question-link:hover
+  color: lightsteelblue
+
+// Questions - Show
+.questioner-buttons
+  display: inline-block
+.answer-form
+  width: 100%
+  align-items: flex-start
+.body-textarea
+  width: 100%
+  height: 300px
 
 
-// ========== IV. Legacy ==========
+
+// ========== V. Legacy ==========
 .pipe-separate
   padding: 0 20px
   border-right: solid 1px lightgrey
