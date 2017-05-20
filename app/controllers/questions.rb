@@ -8,8 +8,10 @@ get '/questions/new' do
 end
 
 post '/questions' do
+  tags = params[:tags].split(", ")
   params[:questioner_id] = session[:id]
-  new_question = Question.create(params)
+  new_question = Question.create(title: params[:title], body: params[:body], questioner_id: session[:id])
+  Tag.make_tags(tags, new_question)
   redirect "/questions/#{new_question.id}"
 end
 

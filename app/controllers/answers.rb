@@ -22,13 +22,6 @@ post '/questions/:id/answers' do
   end
 end
 
-# don't need to show indiv answer unless editing
-# get '/questions/:id/answers/:answer_id' do
-#   @question = Question.find(params[:id])
-#   @answer = Answer.find(params[:answer_id])
-#   erb :'answers/show'
-# end
-
 put '/questions/:id/answers/:answer_id/bestanswer' do
   answers = Question.find(params[:id]).answers.all
   Answer.reset_best_answer(answers)
