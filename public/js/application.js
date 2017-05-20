@@ -77,8 +77,8 @@ $(document).ready(function() {
     })
   })
 
-  $(".q-upvote").submit(function(e){
-    e.preventDefault();
+  $('body').on('submit', "form.upvote", function(event){
+    event.preventDefault();
     var $votes = $(this).siblings('div.votes')
     $.ajax({
       method: "POST",
@@ -91,8 +91,8 @@ $(document).ready(function() {
       })
   })
 
-  $(".q-downvote").submit(function(e){
-    e.preventDefault();
+  $('body').on('submit', "form.downvote", function(event){
+    event.preventDefault();
     var $votes = $(this).siblings('div.votes')
     $.ajax({
       method: "POST",
@@ -104,109 +104,6 @@ $(document).ready(function() {
         $votes.text(response)
       })
   })
-
-  $(".qc-upvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".qc-downvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".a-upvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".a-downvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".ac-upvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".ac-downvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-
-  // $(".best-answer-form").submit(function(e) {
-  //   e.preventDefault();
-  //   var $form = $(this);
-  //   var $img = $form.closest("span");
-  //   console.log($img);
-  //   var link = $(this).attr("action");
-  //   $.ajax({
-  //     method: "PUT",
-  //     url: link,
-  //   })
-  //     .done(function(response) {
-  //       $(".best-answer-image").hide();
-  //       console.log($form.closest("#best-answer-div"))
-  //       $form.closest("span").find("img").show();
-  //     })
-  // })
-
 
   $('body').on('click', 'a.edit-answer', function(event) {
     event.preventDefault()
