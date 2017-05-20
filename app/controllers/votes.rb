@@ -1,3 +1,7 @@
+before '/questions/:id/*' do
+  if !(logged_in?) then redirect "/questions/#{params[:id]}" end
+end
+
 post '/questions/:id/vote' do
   question = Question.find(params[:id])
   votes = question.votes.where(user: current_user)

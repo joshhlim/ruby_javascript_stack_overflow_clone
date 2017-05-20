@@ -11,17 +11,7 @@
   <ul class="sorted-questions questions-by-most-recent">
     <% questions_by_most_recent.each do |question| %>
       <li class="home-questions-li">
-        <div class="home-questions-left question-data">
-          <p class="question-data-stats"><%= question.points %><br>votes</p>
-          <p class="question-data-stats"><%= question.answers.count %><br>answers</p>
-        </div>
-        <div class="home-questions-right">
-          <a href=questions/<%=question.id%> class="question-link"><%= question.title %></a>
-          <div>
-            <span class="question-data-user">Asked at <%= question.created_at %></span>
-            <span class="question-data-user">by <a href="/users/<%= question.questioner.id %>" class="question-link"><%= question.questioner.username %></a></span>
-          </div>
-        </div>
+        <%= erb :'/components/_q-container', locals: { question: question } %>
       </li>
 
     <% end %>
