@@ -35,7 +35,7 @@ put '/questions/:id/answers/:answer_id/bestanswer' do
   Answer.find(params[:answer_id]).update_attributes(best_answer: 1)
 
   if request.xhr?
-    "http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png"
+    "THIS ANSWER ROCKS!"
   else
     redirect "/questions/#{params[:id]}"
   end

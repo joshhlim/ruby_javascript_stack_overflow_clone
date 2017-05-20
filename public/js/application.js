@@ -105,6 +105,36 @@ $(document).ready(function() {
       })
   })
 
+
+  $(".ac-downvote").submit(function(e){
+    e.preventDefault();
+    var $votes = $(this).siblings('div.votes')
+    $.ajax({
+      method: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      dataType: "json"
+    })
+      .done(function(response){
+        $votes.text(response)
+      })
+  })
+
+
+  $("body").on("submit", ".best-answer-form", (function(e) {
+    e.preventDefault();
+    $form = $(this);
+    var link = $(this).attr("action");
+    $.ajax({
+      method: "PUT",
+      url: link,
+    })
+      .done(function(response) {
+        $(".answer-image").remove();
+        $form.append("<img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>");
+      })
+  }))
+  
   $('body').on('click', 'a.edit-answer', function(event) {
     event.preventDefault()
     var $li = $(this).closest('li.pipe-separate')
