@@ -102,6 +102,7 @@ $(document).ready(function() {
       .done(function(response) {
         $(".answer-image").remove();
         $form.append("<img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>");
+        $(".as-container").prepend($form.closest(".a-container"));
       })
   }))
 
@@ -118,7 +119,7 @@ $(document).ready(function() {
       dataType: "html"
     })
     .done(function(response){
-      $(".question-answers").prepend(response);
+      $(".as-container").prepend(response);
       // ~ rehide form, don't show comment form, reshow answer button
       $(".a-form-button").show();
       $that.trigger("reset").hide()
