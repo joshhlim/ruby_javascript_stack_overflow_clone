@@ -6,7 +6,7 @@ end
 post "/questions/:id/comments" do
   new_comment = Comment.create(body: params[:body], commentable_id: params[:id], commentable_type: "Question")
   if request.xhr?
-    "<li>#{new_comment.body}</li>"
+    erb :'/comments/_answercomment'
   else
     redirect "/questions/#{params[:id]}"
   end
