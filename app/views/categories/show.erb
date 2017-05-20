@@ -18,7 +18,7 @@
        <span> author: <%= q.user.username %> ||</span>
        <span> <%= q.comments.count %> comments </span>
        <% if q.user.id == session[:id] %>
-           <form action = "/category/<%=@category.id %>" method = "POST" class= "inline delete">
+           <form action = "/category/<%= @category.id %>/question/<%= q.id %>" method = "POST" class= "inline delete">
              <input type="hidden" name="_method" value="DELETE" />
              <button type="submit" class="btn btn-danger btn-xs delete-button"><span class="glyphicon glyphicon-remove"></span> Delete this question</button>
           </form>

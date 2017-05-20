@@ -1,16 +1,19 @@
-<h1 class='title'>Welcome to the Overflow!!!</h1>
+<div class = "container">
+
+<h1 class='title'>SlackOverflow</h1>
 
 
 
 
-<h3 class=choose> Choose your category (or search below): </h3> </br>
+<h3 class=choose> Find out more about... </h3> </br>
 
 <div class=category-select>
-  <ul>
+  <div class = row>
     <% @categories.each do |cat|  %>
-      <li><a href="/category/<%= cat.id %>"><%= cat.name %></a></li>
+      <!-- <li><a href="/category/<%= cat.id %>"><%= cat.name %></a></li> -->
+      <a href="/category/<%= cat.id %>" class="btn btn-default col-md-2 col-sm-2 col-xs-4"></span><%= cat.name + " ( " + cat.questions.count.to_s + " )" %></a>
     <% end %>
-  </ul>
+  </div>
 </div>
 
 </br>
@@ -20,4 +23,6 @@
     <input type="text" name="search" placeholder="Place a search here">
     <input type="submit" value="Search">
   </form>
+</div>
+
 </div>
