@@ -28,19 +28,6 @@
   /*margin-left: 20px;*/
 }
 
-table {
-  margin: 20px;
-}
-
-td, th {
-  border-bottom: 1px solid #ddd;
-  height: 40px;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2
-}
-
 .question-title {
   font-size: 24px;
   margin-left: 40px;
