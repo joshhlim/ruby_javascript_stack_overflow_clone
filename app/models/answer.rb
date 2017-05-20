@@ -18,4 +18,8 @@ class Answer < ApplicationRecord
   def best_answer?
     self.best_answer == 1
   end
+
+  def bad_answer?
+    self.points < 0
+  end
 end

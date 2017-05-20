@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 
+
+
 // questions/index (display questions sorted by whatever user requests)
 // ~ default most upvoted/trending tabs to hidden
   $(".sorted-qs").hide()
@@ -134,7 +136,7 @@ $(document).ready(function() {
         $form.append("<img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>");
       })
   }))
-  
+
   $('body').on('click', 'a.edit-answer', function(event) {
     event.preventDefault()
     var $li = $(this).closest('li.pipe-separate')

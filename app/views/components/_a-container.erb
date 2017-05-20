@@ -1,6 +1,10 @@
 <div class="a-container">
   <%= erb :'/components/_v-container', locals: { comment: nil, answer: answer, question: nil } %>
-  <p class="a_body"><%= answer.body %></p>
+    <% if answer.bad_answer? %>
+      <p class="a_body bad-answer"><%= answer.body %></p>
+    <% else %>
+      <p class="a_body"><%= answer.body %></p>
+    <% end %>
   <span class="a_user"><%= answer.answerer.username %></span>
   <span class="a_timestamp"><%= long_form_date(answer.created_at) %></span>
   <% if session[:id] == answer.question.questioner.id %>
