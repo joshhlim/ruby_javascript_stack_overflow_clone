@@ -1,0 +1,8 @@
+<% if logged_in? %>
+  <button class="a-form-button" type="submit">Answer this question</button>
+<% end %>
+<form class="a-form" action="/questions/<%= question.id %>/answers" method="post">
+  <label for="body-textarea">Reply:</label>
+  <textarea id="body-textarea" name="answer[body]"></textarea>
+  <input type="submit" value="Respond">
+</form>

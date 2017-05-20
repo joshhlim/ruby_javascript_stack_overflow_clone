@@ -16,7 +16,7 @@ post '/questions/:id/answers' do
   @answer.assign_attributes(question_id: @question.id, answerer_id: session[:id])
   @answer.save
   if request.xhr?
-    erb :'/answers/_show', layout: false, locals: { question: @question, answer: @answer }
+    erb :'/components/_a-container', layout: false, locals: { answer: @answer }
   else
     redirect "/questions/#{@question.id}/answers"
   end

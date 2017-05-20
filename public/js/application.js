@@ -3,33 +3,33 @@ $(document).ready(function() {
 
 // questions/index (display questions sorted by whatever user requests)
 // ~ default most upvoted/trending tabs to hidden
-  $(".sorted-questions").hide()
-  $(".questions-by-most-recent").show()
+  $(".sorted-qs").hide()
+  $(".by-most-recent").show()
 // ~ on tab clicks
   $(".most-recent-tab").on("click", function(e) {
-    $(".sorted-questions").hide()
-    $(".questions-by-most-recent").show();
+    $(".sorted-qs").hide()
+    $(".by-most-recent").show();
   })
   $(".highest-vote-tab").on("click", function(e) {
-    $(".sorted-questions").hide()
-    $(".questions-by-highest-vote").show();
+    $(".sorted-qs").hide()
+    $(".by-highest-vote").show();
   })
   $(".trending-tab").on("click", function(e) {
-    $(".sorted-questions").hide()
-    $(".questions-by-trending").show();
+    $(".sorted-qs").hide()
+    $(".by-trending").show();
   })
 
 
 // questions/show (submit an answer form)
 // ~ default answer-form to hidden
-  $(".question-page-answer-form").hide()
+  $(".a-form").hide()
 // ~ show answer form on button click
-  $("#question-page-answer-button").click(function() {
-    $(".question-page-answer-form").show()
+  $(".a-form-button").click(function() {
+    $(".a-form").show()
     $(this).hide()
   });
 // ~ post answer to database & add to page on form submit
-  $(".question-page-answer-form").submit(function(e) {
+  $(".a-form").submit(function(e) {
     e.preventDefault();
     var link = $(this).attr("action");
     var data = $(this).serialize();
@@ -44,9 +44,9 @@ $(document).ready(function() {
       // ~ add new answer to page
       $(".question-answers").append(response);
       // ~ rehide form, reshow answer button
-      $("#question-page-answer-button").show();
+      $(".a-form-button").show();
       $that.hide()
-      $(".answer-comment-form").hide();
+      $(".a-form").hide();
     })
   });
 
@@ -77,8 +77,8 @@ $(document).ready(function() {
     })
   })
 
-  $(".q-upvote").submit(function(e){
-    e.preventDefault();
+  $('body').on('submit', "form.upvote", function(event){
+    event.preventDefault();
     var $votes = $(this).siblings('div.votes')
     $.ajax({
       method: "POST",
@@ -91,8 +91,8 @@ $(document).ready(function() {
       })
   })
 
-  $(".q-downvote").submit(function(e){
-    e.preventDefault();
+  $('body').on('submit', "form.downvote", function(event){
+    event.preventDefault();
     var $votes = $(this).siblings('div.votes')
     $.ajax({
       method: "POST",
@@ -105,75 +105,6 @@ $(document).ready(function() {
       })
   })
 
-  $(".qc-upvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".qc-downvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".a-upvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".a-downvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-  $(".ac-upvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
 
   $(".ac-downvote").submit(function(e){
     e.preventDefault();
@@ -203,8 +134,7 @@ $(document).ready(function() {
         $form.append("<img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>");
       })
   }))
-
-
+  
   $('body').on('click', 'a.edit-answer', function(event) {
     event.preventDefault()
     var $li = $(this).closest('li.pipe-separate')
