@@ -22,14 +22,14 @@ $(document).ready(function() {
 
 // questions/show (submit an answer form)
 // ~ default answer-form to hidden
-  $(".question-page-answer-form").hide()
+  $(".a-form").hide()
 // ~ show answer form on button click
-  $("#question-page-answer-button").click(function() {
-    $(".question-page-answer-form").show()
+  $(".a-form-button").click(function() {
+    $(".a-form").show()
     $(this).hide()
   });
 // ~ post answer to database & add to page on form submit
-  $(".question-page-answer-form").submit(function(e) {
+  $(".a-form").submit(function(e) {
     e.preventDefault();
     var link = $(this).attr("action");
     var data = $(this).serialize();
@@ -44,9 +44,9 @@ $(document).ready(function() {
       // ~ add new answer to page
       $(".question-answers").append(response);
       // ~ rehide form, reshow answer button
-      $("#question-page-answer-button").show();
+      $(".a-form-button").show();
       $that.hide()
-      $(".answer-comment-form").hide();
+      $(".a-form").hide();
     })
   });
 
