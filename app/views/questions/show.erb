@@ -71,6 +71,9 @@
      <a href='/answers/<%= answer.id %>/comments/new' class='answer_comment'>add a comment</a>
    <% end %>
  </div>
+  <% if session[:id] == answer.user_id %>
+  <div><a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>
+<% end %>
  <% else %>
 
   <article id="answer<%= answer.id %>" class='answer'>
@@ -85,8 +88,8 @@
     <% end %>
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
-    <% if session[:id] %>
-  <div><a href="/question/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>
+    <% if session[:id] == answer.user_id %>
+  <div><a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>
 <% end %>
 
     <h4 class='answer_comments_count'><%= answer.comments.count %> Comments</h4>

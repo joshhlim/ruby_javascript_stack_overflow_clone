@@ -1,6 +1,7 @@
 <div class='container'>
-   <form action="/answers/<%= @answer.user_id %>/answers" method="POST">
-     <label for="answer"> New Answer: </label>
+   <form action="/questions/<%= @question.id %>/answers/<%= @answer.id %>" method="POST">
+   <input type="hidden" name="_method" value="PUT">  
+   <label for="answer"> New Answer: </label>
      <textarea cols='60' rows='10' name="[answer]body" id='body'></textarea>
      <input type="submit" value="Submit Changes">
   </form>

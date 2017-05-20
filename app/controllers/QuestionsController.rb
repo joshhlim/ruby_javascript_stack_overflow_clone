@@ -161,12 +161,14 @@ post '/answers/:id/comments' do
 end
 
 
-get '/questions/:question_id/answers/:id/edit' do 
+get '/questions/:question_id/answers/:id/edit' do
+  @question = Question.find(params[:question_id]) 
   @answer = Answer.find(params[:id])
   erb :'answers/update_answer'
 end
 
 put '/questions/:question_id/answers/:id' do 
+  @question = Question.find(params[:question_id])
   @answer = Answer.find(params[:id])
   @answer.update_attributes(params[:answer])
   @answer.save
