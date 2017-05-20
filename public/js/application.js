@@ -18,6 +18,17 @@ $(document).ready(function() {
     $(".by-trending").show();
   })
 
+
+  $(".profile-cs").hide();
+  $(".profile-cs-tab").on("click", function() {
+    $(".profile-qs").hide();
+    $(".profile-cs").show();
+  })
+  $(".profile-qs-tab").on("click", function() {
+    $(".profile-cs").hide();
+    $(".profile-qs").show();
+  })
+
 // ~ default answer-form to hidden
   $(".a-form").hide()
 // ~ show answer form on button click
