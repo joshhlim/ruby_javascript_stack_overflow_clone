@@ -1,12 +1,18 @@
 <div class="sub-container flex-column">
-
   <h1><%= user.username %>'s profile</h1>
-  <h2>Questions asked by <%= user.username %>:</h2>
 
-  <% if user.questions %>
-    <% user.questions.each do |question| %>
-      <p><a class="question-link" href="/questions/<%= question.id %>"><%= question.title %></a></p>
-    <% end %>
-  <% end %>
+  <div class="sort-buttons flex-row">
+    <button class="profile-qs-tab">Questions</button>
+    <button class="profile-cs-tab">Comments</button>
+  </div>
+
+  <ul class="profile-qs">
+    <%= erb :'/components/_qs-container', locals: { questions: user.questions} %>
+  </ul>
+
+  <ul class="profile-cs">
+    <%= erb :'/components/_cs-container', locals: { comments: user.comments, question:nil, answer: nil} %>
+  </ul>
+
 
 </div>

@@ -21,6 +21,17 @@ $(document).ready(function() {
     $(".by-trending").show();
   })
 
+  $(".profile-cs").hide();
+  $(".profile-cs-tab").on("click", function() {
+    $(".profile-qs").hide();
+    $(".profile-cs").show();
+  })
+  $(".profile-qs-tab").on("click", function() {
+    $(".profile-cs").hide();
+    $(".profile-qs").show();
+  })
+
+
 
 // questions/show (submit an answer form)
 // ~ default answer-form to hidden
