@@ -1,6 +1,25 @@
 $(document).ready(function() {
 
 
+// questions/index (display questions sorted by whatever user requests)
+// ~ default most upvoted/trending tabs to hidden
+  $(".sorted-questions").hide()
+  $(".questions-by-most-recent").show()
+// ~ on tab clicks
+  $(".most-recent-tab").on("click", function(e) {
+    $(".sorted-questions").hide()
+    $(".questions-by-most-recent").show();
+  })
+  $(".highest-vote-tab").on("click", function(e) {
+    $(".sorted-questions").hide()
+    $(".questions-by-highest-vote").show();
+  })
+  $(".trending-tab").on("click", function(e) {
+    $(".sorted-questions").hide()
+    $(".questions-by-trending").show();
+  })
+
+
 // questions/show (submit an answer form)
 // ~ default answer-form to hidden
   $(".question-page-answer-form").hide()
@@ -26,11 +45,10 @@ $(document).ready(function() {
       $(".question-answers").append(response);
       // ~ rehide form, reshow answer button
       $("#question-page-answer-button").show();
-      $(".question-page-answer-form").hide()
+      $that.hide()
       $(".answer-comment-form").hide();
     })
   });
-
 
 
   $("#question-comment-form").hide();
@@ -237,13 +255,14 @@ $(document).ready(function() {
     e.preventDefault();
     var link = $(this).attr("action");
     var data = $(this).serialize();
+    var $this = $(this)
     $.ajax({
       method: "POST",
       url: link,
       data: data
     })
     .done(function(response) {
-      $("#answer-comment-ul").prepend(response)
+      $this.closest(".question-answer").find("#answer-comment-ul").append(response)
       $(".answer-comment-form").hide();
     })
   })

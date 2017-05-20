@@ -1,0 +1,10 @@
+<div class="cs-container">
+  <% comments.each do |comment| %>
+    <%= erb :'/components/_c-container', locals: {comment: comment} %>
+  <% end %>
+  <% if question %>
+    <%= erb :'/components/_c-form', locals: { action: "/questions/#{question.id}" } %>
+  <% elsif answer %>
+    <%= erb :'/components/_c-form', locals: { action: "/questions/#{answer.question.id}/answers/#{answer.id}" } %>
+  <% end %>
+</div>

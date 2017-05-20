@@ -1,58 +1,12 @@
 
 <!-- Vote Button -->
 <!-- =================================== -->
-<% if logged_in? %>
-<div>
-  <form class="q-upvote" method="post" action='/questions/<%= question.id %>/vote'>
-    <button type="submit" name="submit_param" value="submit_value"></button>
-  </form>
-    <div class="votes"><%= question.points %></div>
-  <form class="q-downvote" method="post" action='/questions/<%= question.id %>/downvote'>
-    <button type="submit" name="submit_param" value="submit_value"></button>
-  </form>
-</div>
-<% end %>
 
 <div class="sub-container">
-  <h1><%= question.title %></h1>
 
-  <% if session[:id] == question.questioner_id %>
-    <form class="questioner-buttons" action="<%=question.id%>/edit">
-      <input type="submit" value="Edit Question"/>
-    </form>
-    <form class="questioner-buttons" action="/questions/<%=question.id%>" method="POST" id="questionform">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete question">
-    </form>
-  <% end %>
-
-  <p><%= question.body %></p>
-
-  <ul id="question-comment-ul">
-    <% question.comments.each do |comment| %>
-      <% if logged_in? %>
-        <div>
-        <form class="qc-upvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/vote'>
-          <button type="submit" name="submit_param" value="submit_value"></button>
-        </form>
-          <div class="votes"><%= comment.points %></div>
-        <form class="qc-downvote" method="post" action='/questions/<%= question.id %>/comments/<%= comment.id %>/downvote'>
-          <button type="submit" name="submit_param" value="submit_value"></button>
-        </form>
-        </div>
-      <% end %>
-      <li><%= comment.body %></li>
-    <% end %>
-  </ul>
+  <%= erb :'/components/_q-container', locals: {question: question} %>
 
   <h2>Answers</h2>
-
-  <ul id="question-comment-ul">
-    <% question.comments.each do |comment| %>
-      <li><%= comment.body %></li>
-    <% end %>
-  </ul>
-
     <!-- Shouldn't see this button if not logged  -->
     <button id="question-page-answer-button" type="submit">Answer this question</button>
     <form class="question-page-answer-form" action="/questions/<%= question.id %>/answers" method="post">
@@ -65,14 +19,10 @@
 
   <a id="question-comment-link" href="/questions/<%= question.id %>/comments/new">Comment on this question</a>
 
-  <form id="question-comment-form" action="/questions/<%= question.id %>/comments" method="POST">
-    <textarea rows="3" cols="40" name="body" placeholder="Enter comment..."></textarea>
-    <input type="submit">
-  </form>
-
   </br></br>
 
   <ul class="question-answers">
+
     <% question.answers.each do |answer| %>
       <li class="answers-list">
         <span id="best-answer-div">
@@ -117,5 +67,11 @@
       <li class="question-answer"><%= erb :'answers/_show', locals: {question: question, answer: answer} %></li></br>
       <!-- MOVED THE ANSWER COMMENTS IN A PARTIAL LINKED WITHIN THE ANSWER PARTIAL OR ELSE THE 'COMMENT ON THIS ANSWER' PERSISTS WHEN ANSWER IS DELETED -->
     <% end %>
+
+
+    <%= erb :'/components/_as-container', locals: { answers: question.answers } %>
+
+      <!-- MOVED THE ANSWER COMMENTS IN A PARTIAL LINKED WITHIN THE ANSWER PARTIAL OR ELSE THE 'COMMENT ON THIS ANSWER' PERSISTS WHEN ANSWER IS DELETED -->
+
   </ul>
 </div>

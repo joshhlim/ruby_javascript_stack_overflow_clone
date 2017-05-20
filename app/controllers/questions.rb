@@ -1,6 +1,6 @@
 get '/questions' do
   all_questions = Question.all
-  erb :'questions/index', :locals => {questions: all_questions}
+  erb :'questions/index'
 end
 
 get '/questions/new' do

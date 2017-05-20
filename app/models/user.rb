@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :answers, foreign_key: :answerer_id
   has_many :answers_to_questions, {through: :questions, source: :answers}
   has_many :votes
+  has_many :comments
 
   include BCrypt
 
