@@ -1,7 +1,7 @@
 <h1 class='profile_title'><%= @user.username.capitalize %>'s Profile</h1>
 
 <div>
-	<table>
+	<table class="table table-striped">
 		<% if @questions.empty? %>
 		<tr>
 			<th>
@@ -10,7 +10,7 @@
 		</tr>
 		<% else %>
 		<tr>
-			<th>Question</th>
+			<th>Questions Asked</th>
 			<th>Category</th>
 			<th>Date</th>
 		</tr>
@@ -24,7 +24,7 @@
 			<% end %>
 		<% end %>
 	</table>
-	<table>
+	<table class="table table-striped">
 		<% if !@answers.empty? %>
 		<tr>
 			<th>Questions Answered</th>
@@ -38,7 +38,7 @@
 			<% end %>
 		<% end %>
 	</table>
-	<table>
+	<table class="table table-striped">
 		<% if !@comments.empty?  %>
 		<tr>
 			<th>Commented On:</th>
