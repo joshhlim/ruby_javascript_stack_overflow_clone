@@ -1,4 +1,4 @@
-<h1><%= @user.username.capitalize %>'s Profile</h1>
+<h1 class='profile_title'><%= @user.username.capitalize %>'s Profile</h1>
 
 <div>
 	<table>
@@ -10,15 +10,15 @@
 		</tr>
 		<% else %>
 		<tr>
-			<th>Category</th>
 			<th>Question</th>
+			<th>Category</th>
 			<th>Date</th>
 		</tr>
 
 			<% @questions.each do |question| %>
 			<tr>
-				<td><a href='/category/<%= question.category.id %>'><%= question.category.name %></a></td>
 				<td><a href='/questions/<%= question.id %>'><%= question.title %></a></td>
+				<td><a href='/category/<%= question.category.id %>'><%= question.category.name %></a></td>
 				<td><%= question.created_at %></td>
 			</tr>
 			<% end %>
@@ -58,4 +58,4 @@
 		<% end %>
 	</table>
 </div>
-<div><a href="/users/<%= @user.id %>/edit">Update Profile</a></div>
+<div class='profile_update'><a href="/users/<%= @user.id %>/edit">Update Profile</a></div>
