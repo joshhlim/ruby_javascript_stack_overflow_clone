@@ -10,15 +10,15 @@
 		</tr>
 		<% else %>
 		<tr>
-			<th>Category</th>
 			<th>Question</th>
+			<th>Category</th>
 			<th>Date</th>
 		</tr>
 
 			<% @questions.each do |question| %>
 			<tr>
-				<td><a href='/category/<%= question.category.id %>'><%= question.category.name %></a></td>
 				<td><a href='/questions/<%= question.id %>'><%= question.title %></a></td>
+				<td><a href='/category/<%= question.category.id %>'><%= question.category.name %></a></td>
 				<td><%= question.created_at %></td>
 			</tr>
 			<% end %>
