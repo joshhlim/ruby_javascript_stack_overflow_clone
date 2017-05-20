@@ -1,0 +1,5 @@
+<% questions.each do |question| %>
+<li class="home-questions-li">
+  <%= erb :'/components/_q-container', locals: { question: question } %>
+</li>
+<% end %>

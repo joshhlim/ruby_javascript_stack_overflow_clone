@@ -3,20 +3,20 @@ $(document).ready(function() {
 
 // questions/index (display questions sorted by whatever user requests)
 // ~ default most upvoted/trending tabs to hidden
-  $(".sorted-questions").hide()
-  $(".questions-by-most-recent").show()
+  $(".sorted-qs").hide()
+  $(".by-most-recent").show()
 // ~ on tab clicks
   $(".most-recent-tab").on("click", function(e) {
-    $(".sorted-questions").hide()
-    $(".questions-by-most-recent").show();
+    $(".sorted-qs").hide()
+    $(".by-most-recent").show();
   })
   $(".highest-vote-tab").on("click", function(e) {
-    $(".sorted-questions").hide()
-    $(".questions-by-highest-vote").show();
+    $(".sorted-qs").hide()
+    $(".by-highest-vote").show();
   })
   $(".trending-tab").on("click", function(e) {
-    $(".sorted-questions").hide()
-    $(".questions-by-trending").show();
+    $(".sorted-qs").hide()
+    $(".by-trending").show();
   })
 
 

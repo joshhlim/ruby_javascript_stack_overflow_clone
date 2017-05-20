@@ -4,14 +4,14 @@
   <span class="a_user"><%= answer.answerer.username %></span>
   <span class="a_timestamp"><%= long_form_date(answer.created_at) %></span>
   <% if logged_in? && session[:id] == answer.answerer.id %>
-    <ul class="no-bullets no-padding mar-t-2">
+    <ul>
       <li class="pipe-separate left">
         <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/edit" class="edit-answer">edit</a>
       </li>
       <li class="pipe-separate left">
-        <form class="delete-answer" method="post" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>" class="inline">
+        <form class="delete-answer" method="post" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>">
           <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="delete" class="no-border no-outline no-bg c-white hover-underline">
+          <input type="submit" value="delete">
         </form>
       </li>
     </ul>

@@ -1,23 +1,11 @@
-
-<!-- Vote Button -->
-<!-- =================================== -->
-
 <div class="sub-container">
 
   <%= erb :'/components/_q-container', locals: {question: question} %>
-
   <%= erb :'/components/_a-form', locals: {question: question} %>
-
   <h2>Answers</h2>
-
-
   </br></br>
-
   <ul class="question-answers">
-
     <%= erb :'/components/_as-container', locals: { answers: question.answers } %>
-
-      <!-- MOVED THE ANSWER COMMENTS IN A PARTIAL LINKED WITHIN THE ANSWER PARTIAL OR ELSE THE 'COMMENT ON THIS ANSWER' PERSISTS WHEN ANSWER IS DELETED -->
-
   </ul>
+
 </div>
