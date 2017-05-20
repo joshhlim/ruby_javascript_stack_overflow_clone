@@ -28,6 +28,15 @@
   /*margin-left: 20px;*/
 }
 
+table {
+  margin: 20px;
+}
+
+td, th {
+  border: 1px solid #999;
+  height: 40px;
+  /*width: 150px;*/
+}
 
 .question-title {
   font-size: 24px;
@@ -124,5 +133,9 @@
 
 .btn-warning {
   float: right
+}
+
+.profile_title {
+  margin-left: 20px;
 }
 
