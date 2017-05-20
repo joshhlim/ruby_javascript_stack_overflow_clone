@@ -5,7 +5,7 @@
   <h2>Answers</h2>
   </br></br>
   <ul class="question-answers">
-    <%= erb :'/components/_as-container', locals: { answers: question.answers } %>
+    <%= erb :'/components/_as-container', locals: { answers: question.answers.order('created_at desc') } %>
   </ul>
 
 </div>
