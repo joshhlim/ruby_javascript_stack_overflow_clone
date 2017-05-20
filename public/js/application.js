@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
 // questions/index (display questions sorted by whatever user requests)
 // ~ default most upvoted/trending tabs to hidden
   $(".sorted-qs").hide()
@@ -19,8 +18,6 @@ $(document).ready(function() {
     $(".by-trending").show();
   })
 
-
-// questions/show (submit an answer form)
 // ~ default answer-form to hidden
   $(".a-form").hide()
 // ~ show answer form on button click
@@ -28,9 +25,6 @@ $(document).ready(function() {
     $(".a-form").show()
     $(this).hide()
   });
-
-// ~ post answer to database & add to page on form submit
-
 
 //////////////////    comments    ///////////////////
   $("form.c-form").hide();
