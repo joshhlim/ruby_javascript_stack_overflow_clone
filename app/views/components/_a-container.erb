@@ -15,10 +15,10 @@
   <% end %>
   <% if logged_in? && session[:id] == answer.answerer.id %>
     <ul>
-      <li class="pipe-separate left">
-        <a href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/edit" class="edit-answer">edit</a>
+      <li class="edit-answer">
+        <a class="edit-answer" href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/edit">edit</a>
       </li>
-      <li class="pipe-separate left">
+      <li class="delete-answer">
         <form class="delete-answer" method="post" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>">
           <input type="hidden" name="_method" value="delete">
           <input type="submit" value="delete">

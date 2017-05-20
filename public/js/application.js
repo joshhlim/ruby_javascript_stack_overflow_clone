@@ -1,8 +1,5 @@
 $(document).ready(function() {
 
-
-
-
 // questions/index (display questions sorted by whatever user requests)
 // ~ default most upvoted/trending tabs to hidden
   $(".sorted-qs").hide()
@@ -21,8 +18,6 @@ $(document).ready(function() {
     $(".by-trending").show();
   })
 
-
-// questions/show (submit an answer form)
 // ~ default answer-form to hidden
   $(".a-form").hide()
 // ~ show answer form on button click
@@ -30,55 +25,32 @@ $(document).ready(function() {
     $(".a-form").show()
     $(this).hide()
   });
-// ~ post answer to database & add to page on form submit
-  $(".a-form").submit(function(e) {
+
+//////////////////    comments    ///////////////////
+  $("form.c-form").hide();
+
+  $('body').on('click', "a#answer-comment-link",function(event) {
+    event.preventDefault();
+    $(this).siblings('form.c-form').toggle();
+  })
+
+  $("body").on("submit", "form.c-form", function(e) {
     e.preventDefault();
-    var link = $(this).attr("action");
-    var data = $(this).serialize();
-    var $that = $(this)
+    var $this = $(this)
     $.ajax({
       method: "POST",
-      url: link,
-      data: data,
-      dataType: "html"
-    })
-    .done(function(response){
-      // ~ add new answer to page
-      $(".question-answers").append(response);
-      // ~ rehide form, reshow answer button
-      $(".a-form-button").show();
-      $that.hide()
-      $(".a-form").hide();
-    })
-  });
-
-
-  $("#question-comment-form").hide();
-  $(".answer-comment-form").hide();
-
-  $("#question-comment-link").click(function(e) {
-    e.preventDefault();
-    $("#question-comment-form").show();
-  });
-
-
-
-  $("#question-comment-form").submit(function(e) {
-    e.preventDefault();
-    var link = $(this).attr("action");
-    var data = $(this).serialize();
-    console.log(link)
-    $.ajax({
-      method: "POST",
-      url: link,
-      data: data
+      url: $(this).attr("action"),
+      data: $(this).serialize()
     })
     .done(function(response) {
-      $("#question-comment-ul").prepend(response)
-      $("#question-comment-form").hide();
+      console.log(response)
+      console.log($this.parents("div.cs-container"))
+      $this.parents("div.cs-container").prepend(response)
+      $this.trigger("reset").hide()
     })
   })
 
+////////////////////    votes    ////////////////////
   $('body').on('submit', "form.upvote", function(event){
     event.preventDefault();
     var $votes = $(this).siblings('div.votes')
@@ -107,22 +79,7 @@ $(document).ready(function() {
       })
   })
 
-
-  $(".ac-downvote").submit(function(e){
-    e.preventDefault();
-    var $votes = $(this).siblings('div.votes')
-    $.ajax({
-      method: "POST",
-      url: $(this).attr('action'),
-      data: $(this).serialize(),
-      dataType: "json"
-    })
-      .done(function(response){
-        $votes.text(response)
-      })
-  })
-
-
+//////////////////////////best answer/////////////////////////////
   $("body").on("submit", ".best-answer-form", (function(e) {
     e.preventDefault();
     $form = $(this);
@@ -137,9 +94,31 @@ $(document).ready(function() {
       })
   }))
 
+///////////////////////// add answer//////////////////////////
+  $(".a-form").submit(function(e) {
+    e.preventDefault();
+    var link = $(this).attr("action");
+    var data = $(this).serialize();
+    var $that = $(this)
+    $.ajax({
+      method: "POST",
+      url: link,
+      data: data,
+      dataType: "html"
+    })
+    .done(function(response){
+      $(".question-answers").prepend(response);
+      // ~ rehide form, don't show comment form, reshow answer button
+      $(".a-form-button").show();
+      $that.trigger("reset").hide()
+      $("form.c-form").hide();
+    })
+  })
+
+//////////////////////// edit answer ///////////////////////////
   $('body').on('click', 'a.edit-answer', function(event) {
     event.preventDefault()
-    var $li = $(this).closest('li.pipe-separate')
+    var $li = $(this).closest('li.edit-answer')
     var $this = $(this)
     $.ajax({
       method: "GET",
@@ -160,11 +139,14 @@ $(document).ready(function() {
       data: $(this).serialize()
     })
       .done(function(response){
-        $this.closest('div.question-answer').html(response)
-        $(".answer-comment-form").hide();
+        $this.closest('.as-container').prepend(response)
+        $this.closest('.a-container').remove()
+        $this.hide()
+        $("form.c-form").hide();
       })
   })
 
+///////////////////////// delete answer ////////////////////////////
   $('body').on('submit', 'form.delete-answer', function(event){
     event.preventDefault()
     var $this = $(this)
@@ -173,29 +155,8 @@ $(document).ready(function() {
       url: $this.attr('action')
     })
       .done(function(){
-        $this.closest('div.question-answer').remove()
+        $this.closest('.a-container').remove()
       })
-  })
-
-  $('body').on('click', "#answer-comment-link",function(e) {
-    e.preventDefault();
-    $(this).siblings('.answer-comment-form').toggle();
-  })
-
-  $('body').on('submit', ".answer-comment-form", function(e) {
-    e.preventDefault();
-    var link = $(this).attr("action");
-    var data = $(this).serialize();
-    var $this = $(this)
-    $.ajax({
-      method: "POST",
-      url: link,
-      data: data
-    })
-    .done(function(response) {
-      $this.closest(".question-answer").find("#answer-comment-ul").append(response)
-      $(".answer-comment-form").hide();
-    })
   })
 
 });

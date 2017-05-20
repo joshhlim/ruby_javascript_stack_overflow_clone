@@ -7,7 +7,7 @@ post "/questions/:id/comments" do
   if !(logged_in?) then redirect "/questions/#{params[:id]}" end
   new_comment = Comment.create(body: params[:body], commentable_id: params[:id], commentable_type: "Question", user: current_user)
   if request.xhr?
-    "<li>#{new_comment.body}</li>"
+    erb :'/components/_c-container', layout:false, locals: {comment: new_comment}
   else
     redirect "/questions/#{params[:id]}"
   end
@@ -23,7 +23,7 @@ post "/questions/:id/answers/:answer_id/comments" do
   if !(logged_in?) then redirect "/questions/#{params[:id]}" end
   new_comment = Comment.create(body: params[:body], commentable_id: params[:answer_id], commentable_type: "Answer", user: current_user)
   if request.xhr?
-    "<li>#{new_comment.body}</li>"
+    erb :'/components/_c-container', layout:false, locals: {comment: new_comment}
   else
     redirect "/questions/#{params[:id]}"
   end

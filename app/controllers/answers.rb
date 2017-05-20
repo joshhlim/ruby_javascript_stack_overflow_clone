@@ -53,11 +53,10 @@ get '/questions/:id/answers/:answer_id/edit' do
 end
 
 put '/questions/:id/answers/:answer_id' do
-  @question = Question.find(params[:id])
   @answer = Answer.find(params[:answer_id])
   @answer.update_attributes(params[:answer])
   if request.xhr?
-    erb :'answers/_show', layout: false, locals: {question: @question, answer: @answer}
+    erb :'/components/_a-container', layout: false, locals: {answer: @answer}
   else
     redirect "/questions/#{@question.id}/answers"
   end
