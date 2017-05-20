@@ -4,10 +4,8 @@ class Tag < ApplicationRecord
 
   def self.make_tags(arr, question)
     arr.each do |tag|
-      tag = Tag.find_or_create_by(tag: tag)
-      p question.id
-      p tag.id
-      TagQuestion.create(question_id: question.id, tag_id: tag.id)
+      this_tag = Tag.find_or_create_by(tag: tag.downcase)
+      TagQuestion.create(question_id: question.id, tag_id: this_tag.id)
     end
   end
 end
