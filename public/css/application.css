@@ -33,10 +33,11 @@ table {
 }
 
 td, th {
-  border: 1px solid #999;
+  border-bottom: 1px solid #ddd;
   height: 40px;
-  /*width: 150px;*/
 }
+
+tr:nth-child(even) {background-color: #f2f2f2}
 
 .question-title {
   font-size: 24px;
@@ -139,3 +140,6 @@ td, th {
   margin-left: 20px;
 }
 
+.profile_update > a {
+  padding-left: 20px;
+}
