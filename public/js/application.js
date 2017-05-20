@@ -190,22 +190,19 @@ $(document).ready(function() {
   })
 
 
-  // $(".best-answer-form").submit(function(e) {
-  //   e.preventDefault();
-  //   var $form = $(this);
-  //   var $img = $form.closest("span");
-  //   console.log($img);
-  //   var link = $(this).attr("action");
-  //   $.ajax({
-  //     method: "PUT",
-  //     url: link,
-  //   })
-  //     .done(function(response) {
-  //       $(".best-answer-image").hide();
-  //       console.log($form.closest("#best-answer-div"))
-  //       $form.closest("span").find("img").show();
-  //     })
-  // })
+  $("body").on("submit", ".best-answer-form", (function(e) {
+    e.preventDefault();
+    $form = $(this);
+    var link = $(this).attr("action");
+    $.ajax({
+      method: "PUT",
+      url: link,
+    })
+      .done(function(response) {
+        $(".answer-image").remove();
+        $form.append("<img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>");
+      })
+  }))
 
 
   $('body').on('click', 'a.edit-answer', function(event) {
