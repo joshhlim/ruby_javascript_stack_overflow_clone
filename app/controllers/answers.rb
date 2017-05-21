@@ -10,7 +10,7 @@ get '/questions/:id/answers/new' do
 end
 
 post '/questions/:id/answers' do
-  if !(logged_in?) then redirect "/questions/#{params[:id]}" end
+    if !(logged_in?) then redirect "/questions/#{params[:id]}" end
   @question = Question.find(params[:id])
   @answer = Answer.new(params[:answer])
   @answer.assign_attributes(question_id: @question.id, answerer_id: session[:id])
