@@ -4,6 +4,10 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
+  has_many :tagquestions, class_name: :TagQuestion, foreign_key: :question_id
+  has_many :tags, through: :tagquestions
+
+
 
   def points
     votes.sum(:value)

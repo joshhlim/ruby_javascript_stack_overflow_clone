@@ -2,6 +2,9 @@
   <%= erb :'/components/_v-container', locals: { comment: nil, answer: nil, question: question } %>
   <h2 class="q_title"><a href="/questions/<%= question.id %>"><%= question.title %></a></h2>
   <p class="q_body"><%= question.body %></p>
+  <span class="tags"><% question.tags.each do |tag| %>
+                    <%= tag.tag %>
+                    <% end %></span>
   <span class="q_user"><%= question.questioner.username %></span>
   <span class="q_timestamp"><%= long_form_date(question.created_at) %></span>
   <%= erb :'/components/_cs-container', locals: { comments: question.comments, question: question, answer: nil } %>

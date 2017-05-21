@@ -9,9 +9,11 @@ end
 
 post '/questions' do
   if logged_in?
-    params[:questioner_id] = session[:id]
-    new_question = Question.create(params)
-    redirect "/questions/#{new_question.id}"
+  tags = params[:tags].split(", ")
+  params[:questioner_id] = session[:id]
+  new_question = Question.create(title: params[:title], body: params[:body], questioner_id: session[:id])
+  Tag.make_tags(tags, new_question)
+  redirect "/questions/#{new_question.id}"
   else
     redirect '/questions/new'
   end
