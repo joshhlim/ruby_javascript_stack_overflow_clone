@@ -9,13 +9,17 @@
   <% @voted_question = Vote.find_by(voteable_type: "Question", voteable_id: @question.id, user_id: session[:id]) %>
   <% if @voted_question %>
      <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+     <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span> </button>
   <% else %>
     <form action = "/questions/<%= @question.id %>/vote" method = "POST" class= "inline">
       <button type="submit" class="btn btn-success btn-xs vote-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
    </form>
+   <form action = "/questions/<%= @question.id %>/downvote" method = "POST" class= "inline">
+      <button type="submit" class="btn btn-failure btn-xs downvote-button"><span class="glyphicon glyphicon-triangle-bottom"></span> </button>
+   </form>
   <% end %>
    <span class="count"> <%= @question.votes.count %> votes || </span>
-
+   <span class="total"> <%= @question.vote_count %> score || </span>
    <span> author: <%= @question.user.username %> ||</span>
 
    <span> <%= @question.comments.count %> comments </span>
@@ -50,12 +54,17 @@
      <% @voted_answer = Vote.find_by(voteable_type: "Answer", voteable_id: answer.id, user_id: session[:id]) %>
      <% if @voted_answer %>
        <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+       <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span> </button>
    <% else %>
       <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/vote" method = "POST" class= "inline">
         <button type="submit" class="btn btn-success btn-xs vote-answer-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
      </form>
+     <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/downvote" method = "POST" class= "inline">
+        <button type="submit" class="btn btn-failure btn-xs downvote-answer-button"><span class="glyphicon glyphicon-triangle-bottom"></span> </button>
+     </form>
    <% end %>
    <span class="count-answer"> <%= answer.votes.count %> votes || </span>
+   <span class="total-answer"> <%= answer.vote_count %> score || </span>
    <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
    <button type="button" class="btn btn-warning inline"><span class="glyphicon glyphicon-fire"></span> Popular Answer</button> </br>
 
@@ -81,12 +90,17 @@
     <% @voted_answer = Vote.find_by(voteable_type: "Answer", voteable_id: answer.id, user_id: session[:id]) %>
     <% if @voted_answer %>
       <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-top"></span> </button>
+      <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-triangle-bottom"></span> </button>
     <% else %>
       <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/vote" method = "POST" class= "inline">
         <button type="submit" class="btn btn-success btn-xs vote-answer-button"><span class="glyphicon glyphicon-triangle-top"></span> </button>
       </form>
+      <form action = "/questions/<%= @question.id %>/answer/<%= answer.id %>/downvote" method = "POST" class= "inline">
+        <button type="submit" class="btn btn-failure btn-xs downvote-answer-button"><span class="glyphicon glyphicon-triangle-bottom"></span> </button>
+     </form>
     <% end %>
     <span class="count-answer"> <%= answer.votes.count %> votes || </span>
+   <span class="total-answer"> <%= answer.vote_count %> score || </span>
     <span class='answer-user'><%= answer.user.username %>   -   <%= answer.updated_at%></span>
     <% if session[:id] == answer.user_id %>
   <div><a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/edit">Update Answer</a></div>

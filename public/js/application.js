@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.vote-button').on("click", function(e){
+  $(".question_votes").on("click", ".vote-button", function(e){
     e.preventDefault()
       var id = $(this).closest("article").attr("id")
       var route = $(this).parent().attr('action')
@@ -11,13 +11,34 @@ $(document).ready(function() {
 
       });
       request.done(function(response){
-        console.log(typeof $('#' + id).find(".vote-button"))
         $('#' + id).find(".vote-button").removeClass("btn-success btn-xs");
         $('#' + id).find(".vote-button").addClass("btn-danger btn-xs");
         alert("You voted")
+        $('#' + id).find(".total").text(response.total + " votes ||")
         $('#' + id).find(".count").text(response.count + " votes ||")
       })
-   })
+   });
+
+  $('.question_votes').on("click", ".downvote-button", function(e){
+    e.preventDefault()
+      var id = $(this).closest("article").attr("id")
+      var route = $(this).parent().attr('action')
+
+      var request = $.ajax({
+        method: "post",
+        url: route,
+        dataType: "json"
+
+      });
+      request.done(function(response){
+        $('#' + id).find(".downvote-button").removeClass("btn-success btn-xs");
+        $('#' + id).find(".downvote-button").addClass("btn-danger btn-xs");
+        alert("You Downvoted")
+        $('#' + id).find(".total").text(response.total + " votes ||")
+        $('#' + id).find(".count").text(response.count + " votes ||")
+      })
+   });
+
 
   $('div').on('click', '.question_comment', function(e){
     e.preventDefault()
@@ -58,7 +79,8 @@ $(document).ready(function() {
   });
 
    $('.vote-answer-button').on("click", function(e){
-     e.preventDefault()
+       console.log($(this))
+       e.preventDefault()
        var id = $(this).closest("article").attr("id")
        var route = $(this).parent().attr('action')
 
@@ -73,12 +95,33 @@ $(document).ready(function() {
          $('#' + id).find(".vote-answer-button").removeClass("btn-success btn-xs");
          $('#' + id).find(".vote-answer-button").addClass("btn-danger btn-xs");
          alert("You voted")
+         $('#' + id).find(".total-answer").text(response.total + " votes ||")
          $('#' + id).find(".count-answer").text(response.count + " votes ||")
        })
-    })
+    });
 
+   $(".downvote-answer-button").on("click", function(e){
+       e.preventDefault()
+       var id = $(this).closest("article").attr("id")
+       var route = $(this).parent().attr('action')
 
-   $('.delete-button').on("click", function(e){
+       var request = $.ajax({
+         method: "post",
+         url: route,
+         dataType: "json"
+
+       });
+       request.done(function(response){
+         console.log($('#' + id).find(".count-answer"))
+         $('#' + id).find(".downvote-answer-button").removeClass("btn-success btn-xs");
+         $('#' + id).find(".downvote-answer-button").addClass("btn-danger btn-xs");
+         alert("You voted")
+         $('#' + id).find(".total-answer").text(response.total + " votes ||")
+         $('#' + id).find(".count-answer").text(response.count + " votes ||")
+       })
+    });
+
+  $('.delete-button').on("click", function(e){
     e.preventDefault()
       var id = $(this).closest("article").attr("id")
       var route = $(this).closest("form").attr('action')

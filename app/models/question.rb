@@ -17,4 +17,10 @@ class Question < ActiveRecord::Base
     end
     matches.uniq
   end
+
+  def vote_count
+    self.votes.reduce(0) {|count, vote| count += vote.value}
+  end
+
+
 end

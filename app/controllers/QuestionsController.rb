@@ -14,38 +14,76 @@ get '/questions/new' do
 end
 
 post '/questions/:question_id/answer/:id/vote' do
-  @question = Question.find_by(id: params[:question_id])
-  @category = @question.category
-  @answer = Answer.find_by(id: params[:id], question_id: params[:question_id])
-  @vote = Vote.new(voteable_type: Answer, voteable_id: params[:id], user_id: session[:id])
-  @vote.save
-   if request.xhr?
-     content_type :json
-     {id: @answer.id, count: @answer.votes.count}.to_json
-   else
-     erb :'categories/show'
+if session[:id]
+    @question = Question.find_by(id: params[:question_id])
+    @category = @question.category
+    @answer = Answer.find_by(id: params[:id], question_id: params[:question_id])
+    @vote = Vote.new(voteable_type: "Answer", voteable_id: params[:id], user_id: session[:id], value: 1)
+    if @vote.save
+     if request.xhr?
+       content_type :json
+       {id: @answer.id, count: @answer.votes.count,  total: @answer.vote_count}.to_json
+     else
+       redirect :"questions/#{@question.id}"
+     end
+  end
+ end
+end
+
+post '/questions/:question_id/answer/:id/downvote' do
+if session[:id]
+    @question = Question.find_by(id: params[:question_id])
+    @category = @question.category
+    @answer = Answer.find_by(id: params[:id], question_id: params[:question_id])
+    @vote = Vote.new(voteable_type: "Answer", voteable_id: params[:id], user_id: session[:id], value: -1)
+    if @vote.save
+     if request.xhr?
+       content_type :json
+       {id: @answer.id, total: @answer.votes.count,  count: @answer.vote_count}.to_json
+     else
+       redirect :"questions/#{@question.id}"
+    end
    end
+  end
 end
 
 post '/questions/:id/vote' do
  # Tried to implement logic to only allow a user to vote once - not working yet
  # @repeater = Vote.find_by(user_id: session[:id]).voteable_id
  # if @repeater.include?(params[:id])
-  @question = Question.find_by(id: params[:id])
-  puts @question
-  @category = @question.category
-  puts "category #{@category}"
-  @vote = Vote.new(voteable_type: "Question", voteable_id: params[:id], user_id: session[:id])
-  puts "vote #{@vote}"
-  @vote.save
-   if request.xhr?
-     puts "in xhr"
-     content_type :json
-     {id: @question.id, count: @question.votes.count}.to_json
-   else
-     erb :'categories/show'
+ if session[:id]
+   @question = Question.find_by(id: params[:id])
+   @category = @question.category
+   @vote = Vote.new(voteable_type: "Question", voteable_id: params[:id], user_id: session[:id], value: 1)
+   if @vote.save
+    if request.xhr?
+      @voted_question = Vote.find_by(voteable_type: "Question", voteable_id: @question.id, user_id: session[:id])
+      content_type :json
+      {id: @question.id, count: @question.votes.count, total: @question.vote_count}.to_json
+    else
+      erb :'categories/show'
+    end
    end
- # end
+  end
+end
+
+post '/questions/:id/downvote' do
+ # Tried to implement logic to only allow a user to vote once - not working yet
+ # @repeater = Vote.find_by(user_id: session[:id]).voteable_id
+ # if @repeater.include?(params[:id])
+ if session[:id]
+    @question = Question.find_by(id: params[:id])
+    @vote = Vote.new(voteable_type: "Question", voteable_id: params[:id], user_id: session[:id], value: -1)
+    if @vote.save
+     if request.xhr?
+      @voted_question = Vote.find_by(voteable_type: "Question", voteable_id: @question.id, user_id: session[:id])
+       content_type :json
+       {id: @question.id, count: @question.votes.count, total: @question.vote_count}.to_json
+     else
+       erb :'categories/show'
+     end
+    end
+  end
 end
 
 # create
@@ -68,7 +106,7 @@ end
 
 # edit
 get '/questions/:id/edit' do
-  @categories = Category.all 
+  @categories = Category.all
   @question = Question.find(params[:id])
   erb :'questions/update_question'
 end
@@ -162,16 +200,16 @@ end
 
 
 get '/questions/:question_id/answers/:id/edit' do
-  @question = Question.find(params[:question_id]) 
+  @question = Question.find(params[:question_id])
   @answer = Answer.find(params[:id])
   erb :'answers/update_answer'
 end
 
-put '/questions/:question_id/answers/:id' do 
+put '/questions/:question_id/answers/:id' do
   @question = Question.find(params[:question_id])
   @answer = Answer.find(params[:id])
   @answer.update_attributes(params[:answer])
   @answer.save
   redirect "/questions/#{@question.id}"
-end   
+end
 
