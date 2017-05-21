@@ -4,6 +4,10 @@ module QuestionsHelper
     Question.all.sort_by{ |q| q.points }.reverse
   end
 
+  def answers_by_highest(collection)
+    collection.sort_by{ |a| a.points  }.reverse
+  end
+
   def questions_by_most_recent
     Question.all.sort_by{ |q| q.created_at }.reverse
   end

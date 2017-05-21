@@ -1,4 +1,4 @@
-<% if logged_in? %>
+<% if logged_in? && question.questioner.id != session[:id] %>
   <button class="a-form-button" type="submit">Answer this question</button>
 <% end %>
 <form class="a-form" action="/questions/<%= question.id %>/answers" method="post">

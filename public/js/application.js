@@ -65,6 +65,15 @@ $(document).ready(function() {
   $('body').on('submit', "form.upvote", function(event){
     event.preventDefault();
     var $votes = $(this).siblings('div.votes')
+    var value = $votes.html()
+    console.log($('div.votes'))
+//     var $wrapper = $('as-container')
+//     console.log($(this).siblings('div.votes'))
+//     console.log($wrapper.find('div.votes').sort(function(a, b) {
+//     return +a.dataset.percentage - +b.dataset.percentage;
+// }))
+//     var madness = $wrapper.find('div.votes').sort(function(a, b) {
+//     return +a.dataset.percentage - +b.dataset.percentage;})
     $.ajax({
       method: "POST",
       url: $(this).attr('action'),
@@ -73,6 +82,7 @@ $(document).ready(function() {
     })
       .done(function(response){
         $votes.text(response)
+        // madness.prependTo($wrapper)
       })
   })
 

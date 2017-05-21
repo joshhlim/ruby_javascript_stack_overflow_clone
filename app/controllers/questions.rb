@@ -8,16 +8,21 @@ get '/questions/new' do
 end
 
 post '/questions' do
+  if logged_in?
   tags = params[:tags].split(", ")
   params[:questioner_id] = session[:id]
   new_question = Question.create(title: params[:title], body: params[:body], questioner_id: session[:id])
   Tag.make_tags(tags, new_question)
   redirect "/questions/#{new_question.id}"
+  else
+    redirect '/questions/new'
+  end
 end
 
 get '/questions/:id' do
   question = Question.find(params[:id])
-  erb :'questions/show', :locals => {question: question}
+  answers = question.answers
+  erb :'questions/show', :locals => {question: question, answers: answers}
 end
 
 get '/questions/:id/edit' do

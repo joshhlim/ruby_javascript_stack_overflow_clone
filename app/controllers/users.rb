@@ -7,8 +7,12 @@ end
 
 post '/users/login' do
   @user = User.find_by(username: params[:user][:username])
-  session[:id] = @user.id
-  redirect "/users/#{@user.id}"
+  if @user
+    session[:id] = @user.id
+    redirect "/users/#{@user.id}"
+  else
+    redirect '/users/login'
+  end
 end
 
 get '/users/:id/edit' do
