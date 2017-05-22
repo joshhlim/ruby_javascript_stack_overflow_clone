@@ -125,15 +125,6 @@ button, input {
   justify-content: flex-start;
 }
 
-/*.u-form-fieldset {
-  width: 80%;
-}
-*/
-
-/*.v-container {
-  align-items: space-around;
-}*/
-
 .font-sm {
   font-size: 1em; }
 
@@ -198,15 +189,6 @@ button, input {
 
 .home-questions-right {
   margin-left: 15px; }
-
-.question-link {
-  color: steelblue; }
-
-.question-link:hover {
-  color: lightsteelblue; }
-
-.questioner-buttons {
-  display: inline-block; }
 
 .answer-form {
   align-items: flex-start; }
