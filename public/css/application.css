@@ -6,7 +6,7 @@
 /*========== I. Resets ==========*/
 /*===============================*/
 
-h1, h2, h3, p, body, li, ul {
+h1, h2, h3, p, body, li, ul, label, input {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
@@ -33,21 +33,22 @@ h1 {
   font-size: 2.5em;
   margin-bottom: 20px;
 }
+h2 {
+  font-size: 2em;
+  margin: 10px 0;
+}
 h3 {
   font-size: 2.5em;
   margin: 10px 0;
-}
-button {
-  color: #FFF;
-  background-color: #0095ff;
-  border-color: #07c;
-  box-shadow: inset 0 1px 0 #66bfff;
 }
 a {
   color: steelblue;
 }
 a:hover {
   color: lightsteelblue;
+}
+textarea {
+  min-height: 180px;
 }
 
 
@@ -100,9 +101,13 @@ a:hover {
   margin-left: 20px;
 }
 .main-nav-link {
+  color: black;
   display: inline-block;
   height: 100%;
   width: 100%;
+}
+.main-nav-link:hover {
+  color: black;
 }
 .main-nav-li:hover {
   background-color: silver;
@@ -116,6 +121,7 @@ a:hover {
   border-radius: 15px;
   border: solid dimgrey 2px;
   box-shadow: 0 2px 2px 0 darkgrey;
+  color: black;
   margin-right: 20px;
   padding: 5px;
   transition: background 0.1s linear;
@@ -135,13 +141,29 @@ h3.q_title {
   padding: 0 20px;
   box-sizing: border-box;
 }
+.sort-buttons>* {
+  margin: 0 10px;
+}
+a.submit-buttons, button.submit-buttons, input.submit-buttons {
+  width: 120px;
+  background-color: whitesmoke;
+  color: steelblue;
+  border: solid 1px steelblue;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 2px 2px lightgrey;
+}
+
+a.submit-buttons:hover, button.submit-buttons:hover, input.submit-buttons:hover {
+  background-color: lightsteelblue;
+} 
 
 
 /* ========== a. Component-specific ========== */
 
-/* Flex */
+/* Flex etc. */
 /* ~~~~~~~~~~~~~~~ */
-.a-form, .a-form-container, ..cs-container, c-form, .c-form-container, .q-form {
+.a-form, .a-form-container, .cs-container, .c-form, .c-form-container, .q-form {
   align-items: flex-start;
 }
 .q_tags_questioner, .q_title-form {
@@ -153,6 +175,10 @@ h3.q_title {
 .a_answerer {
   justify-content: flex-end;
 }
+.c_timestamp, .a_timestamp {
+  margin-left: 5px;
+}
+
 
 /* Questions */
 /* ~~~~~~~~~~~~~~~ */
@@ -162,14 +188,43 @@ h3.q_title {
   padding: 5px;
   text-align: center;
 }
-.q_tags-label {
-  color: lightblue;
+.q_tags {
+  margin: 10px 0;
 }
 .tags {
-  background-color: lightblue;
+  background-color: lightsteelblue;
   margin-left: 5px;
-  padding: 5px;
+  padding: 7px;
+  border-radius: 3px;
 }
+.q-form>* {
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* Answers */
+/* ~~~~~~~~~~~~~~~ */
+.a-form-container, .c-form-container {
+  border: solid 1px grey;
+  background-color: whitesmoke;
+  margin: 10px 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.a-form-button {
+  align-self: center;
+}
+.a-form>*, .c-form>* {
+  margin: 10px 0;
+}
+.edit-answer {
+  display: inline-block;
+  text-align: center;
+}
+.delete-answer {
+  display: inline-block;
+}
+
 
 /* Votes */
 /* ~~~~~~~~~~~~~~~ */
@@ -179,6 +234,26 @@ h3.q_title {
 }
 .votes {
   margin: 0 15px 0 0;
+}
+.upvote-button, .downvote-button {
+  font-weight: bold;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  border: none;
+  background-color: white;
+}
+.upvote-button:hover, .downvote-button:hover {
+  color: red;
+}
+
+/* Comments */
+/* ~~~~~~~~~~~~~~~ */
+
+.c_votes_body {
+  justify-content: flex-start
+}
+.c_commenter {
+  justify-content: flex-end;
 }
 
 /* Users */

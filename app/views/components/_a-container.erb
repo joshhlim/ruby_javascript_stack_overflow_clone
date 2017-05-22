@@ -9,7 +9,7 @@
     </div>
   <div class="a_answerer flex-row width-100">
     <span class="a_user">answered by <a href="users/<%= answer.answerer.id %>"><%= answer.answerer.username %></a></span>
-    <span class="a_timestamp"> on <%= long_form_date(answer.created_at) %></span>
+    <span class="a_timestamp">on <%= long_form_date(answer.created_at) %></span>
   </div>
   <% if session[:id] == answer.question.questioner.id %>
     <form class="best-answer-form" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/bestanswer" method="POST">
@@ -20,12 +20,12 @@
   <% if logged_in? && session[:id] == answer.answerer.id %>
     <ul>
       <li class="edit-answer">
-        <a class="edit-answer" href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/edit">edit</a>
+        <a class="edit-answer submit-buttons" href="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/edit">Edit Answer</a>
       </li>
       <li class="delete-answer">
         <form class="delete-answer" method="post" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>">
           <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="delete">
+          <input class="submit-buttons" type="submit" value="Delete Answer">
         </form>
       </li>
     </ul>

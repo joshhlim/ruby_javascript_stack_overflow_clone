@@ -2,15 +2,15 @@
   <h1><%= user.username %>'s profile</h1>
 
   <div class="sort-buttons flex-row">
-    <button class="profile-qs-tab">Questions</button>
-    <button class="profile-cs-tab">Comments</button>
+    <button class="profile-qs-tab submit-buttons">Questions</button>
+    <button class="profile-cs-tab submit-buttons">Comments</button>
   </div>
 
-  <ul class="profile-qs">
+  <ul class="profile-qs width-100">
     <%= erb :'/components/_qs-container', locals: { questions: user.questions} %>
   </ul>
 
-  <ul class="profile-cs">
+  <ul class="profile-cs width-100">
     <%= erb :'/components/_cs-container', locals: { comments: user.comments, question:nil, answer: nil} %>
   </ul>
 
