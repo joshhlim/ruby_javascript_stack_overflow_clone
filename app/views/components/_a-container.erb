@@ -1,4 +1,4 @@
-<div class="a-container width-100">
+<div class="comp-container a-container width-100">
   <div class="a_votes_body flex-row width-100">
     <%= erb :'/components/_v-container', locals: { comment: nil, answer: answer, question: nil } %>
     <% if answer.bad_answer? %>
@@ -8,8 +8,8 @@
     <% end %>
     </div>
   <div class="a_answerer flex-row width-100">
-    <span class="a_user"><%= answer.answerer.username %></span>
-    <span class="a_timestamp"><%= long_form_date(answer.created_at) %></span>
+    <span class="a_user">answered by <a href="users/<%= answer.answerer.id %>"><%= answer.answerer.username %></a></span>
+    <span class="a_timestamp"> on <%= long_form_date(answer.created_at) %></span>
   </div>
   <% if session[:id] == answer.question.questioner.id %>
     <form class="best-answer-form" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/bestanswer" method="POST">

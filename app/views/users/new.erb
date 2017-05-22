@@ -1,16 +1,26 @@
-<h1> Enter New User Information</h1></br>
-<% if @errors %>
-  <% @errors.each do |error| %>
-  <%= error %>
-  <% end %>
-<% end %>
+<div class="sub-container flex-column">
 
-<form class="u-form flex-column" action='/users' method="post">
-  <label>Username: </label>
-  <input type="text" name="user[username]"></br>
-  <label>Email: </label>
-  <input type="text" name="user[email]"></br>
-  <label>Password: </label>
-  <input type="password" name="user[password]"></br>
-  <input type="submit" style="color:green;">
-</form>
+  <h1> Enter New User Information</h1>
+  <% if @errors %>
+    <% @errors.each do |error| %>
+      <%= error %>
+    <% end %>
+  <% end %>
+
+  <form class="u-form flex-column" action='/users' method="post">
+  <div class="u-form-fieldset fieldset">
+    <label>Username: </label><br>
+    <input type="text" name="user[username]">
+  </div>
+  <div class="u-form-fieldset fieldset">
+    <label>Email: </label><br>
+    <input type="text" name="user[email]">
+  </div>
+  <div class="u-form-fieldset fieldset">
+    <label>Password: </label><br>
+    <input type="password" name="user[password]">
+  </div>
+    <input type="submit">
+  </form>
+
+</div>
