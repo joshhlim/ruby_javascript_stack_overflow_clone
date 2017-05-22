@@ -1,4 +1,9 @@
+before '/questions*' do
+  @home_page = false
+end
+
 get '/questions' do
+  @home_page = true
   all_questions = Question.all
   erb :'questions/index'
 end
