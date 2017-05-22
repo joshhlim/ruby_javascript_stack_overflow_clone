@@ -12,9 +12,9 @@
     <span class="a_timestamp">on <%= long_form_date(answer.created_at) %></span>
   </div>
   <% if session[:id] == answer.question.questioner.id %>
-    <form class="best-answer-form" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/bestanswer" method="POST">
+    <form class="best-answer-form flex-row" action="/questions/<%= answer.question.id %>/answers/<%= answer.id %>/bestanswer" method="POST">
       <input type="hidden" name="_method" value="PUT">
-      <input type="submit" value="Best answer">
+      <input class="submit-buttons" type="submit" value="Best answer">
     </form>
   <% end %>
   <% if logged_in? && session[:id] == answer.answerer.id %>
@@ -31,7 +31,8 @@
     </ul>
   <% end %>
   <% if answer.best_answer? %>
-    <img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>
+      <img class='answer-image' src='http://clipartix.com/wp-content/uploads/2016/04/Thumbs-up-clipart-2.png' width=30 height=30>
+    </div>
   <% end %>
 
   <%= erb :'/components/_cs-container', locals: { comments: answer.comments, question: nil, answer: answer } %>
