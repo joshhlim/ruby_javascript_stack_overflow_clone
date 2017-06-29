@@ -1,1 +1,1 @@
-Polymorphic associations, Ruby Sinatra Back End, jQuery JS AJAX Front End, complete with Best Answer, Trending, and Top Voted features.
+Polymorphic associations, Ruby Sinatra Back End, jQuery JS Front End, complete with Best Answer, Trending, and Top Voted features. Only the author of a question/comment can view buttons to Edit/Delete, which is performed via AJAX. Also possesses flawless Upvote and Downvote functionality.
